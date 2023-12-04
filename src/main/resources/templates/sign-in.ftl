@@ -48,6 +48,6 @@
         <p class="go-sign-up">Ещё нет аккаунта? <a href="/sign-up" class="go-sign-up">Зарегистрироваться</a></p>
     </div>
 
-
+</main>
 </body>
 </html>

@@ -74,6 +74,6 @@
 
 <#--    <#include "components/footer.ftl" >-->
 
-
+</main>
 </body>
 </html>
