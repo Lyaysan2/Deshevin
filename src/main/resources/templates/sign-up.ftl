@@ -28,50 +28,51 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <div class="container">
-        <h1>Регистрация</h1>
-    </div>
-    <form method="post" action="/sign-up" class="sign-up-form" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="username" class="form-label">Имя пользователя</label>
-            <input type="text" class="form-control" id="username" name="username" required>
-        </div>
-        <div class="mb-3">
-            <label for="firstName" class="form-label">Имя</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" required>
-        </div>
-        <div class="mb-3">
-            <label for="lastName" class="form-label">Фамилия</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" required>
-        </div>
-        <div class="mb-3">
-            <label for="city" class="form-label">Город</label>
-            <input type="text" class="form-control" id="city" name="city" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Электронная почта</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Пароль</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <br>
-        <br>
-        <input class="btn btn-info" type="submit" value="Зарегистрироваться">
-
-    </form>
-
-    <#if errors??>
-        <#list errors as error>
-            <div class="text">Ошибка: ${error.name}</div>
+    <h1>Регистрация</h1>
+    <div class="home-content">
+        <form method="post" action="/sign-up" class="form-wrapper" enctype="multipart/form-data">
+            <div>
+                <h3>Имя пользователя</h3>
+                <input type="text" class="input-form" id="username" name="username" required>
+            </div>
+            <div>
+                <h3>Имя</h3>
+                <input type="text" class="input-form" id="firstName" name="firstName" required>
+            </div>
+            <div>
+                <h3>Фамилия</h3>
+                <input type="text" class="input-form" id="lastName" name="lastName" required>
+            </div>
+            <div>
+                <h3>Город</h3>
+                <input type="text" class="input-form" id="city" name="city" required>
+            </div>
+            <div>
+                <h3>Электронная почта</h3>
+                <input type="email" class="input-form" id="email" name="email" required>
+            </div>
+            <div>
+                <h3>Пароль</h3>
+                <input type="password" class="input-form" id="password" name="password" required>
+            </div>
             <br>
-        </#list>
-    </#if>
+            <br>
+            <input class="btn btn-info" type="submit" value="Зарегистрироваться">
 
-    <a href="/sign-in" class="sign-in">Перейти к login</a>
+        </form>
 
-    <#include "components/footer.ftl" >
+        <#if errors??>
+            <#list errors as error>
+                <div class="text">Ошибка: ${error.name}</div>
+                <br>
+            </#list>
+        </#if>
+
+        <p class="go-sign-up">Есть аккаунт? <a href="/sign-in" class="go-sign-up">Войти</a></p>
+    </div>
+
+
+<#--    <#include "components/footer.ftl" >-->
 
 
 </body>
