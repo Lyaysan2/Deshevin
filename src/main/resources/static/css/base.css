@@ -1,0 +1,159 @@
+body {
+    font-family: Inter, sans-serif;
+}
+
+h1, h3, p {
+    color: #1D0D8D;
+}
+
+a {
+    text-decoration: none;
+    padding: 8px;
+    font-size: 20px;
+}
+
+a:active, a:hover{
+    font-weight: bold;
+}
+
+.navbar {
+    background-color: #1D0D8D;
+    height: 64px;
+    width: 100%;
+}
+
+.navbar-content {
+    padding-top: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-text-content {
+    width: 80%;
+    padding-top: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbar-text {
+    color: white;
+}
+
+.btn {
+    background-color: #FC462D;
+    border: 3px solid #FC462D;
+    cursor: pointer;
+    border-radius: 16px;
+    padding-left: 18px;
+    padding-right: 18px;
+    color: white;
+    font-family: Inter, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    height: 45px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-image: linear-gradient(180deg, #e2defc, white);
+}
+
+.home-content {
+    display: grid;
+    place-items: center;
+    height: 70vh;
+}
+
+.home-text-main {
+    text-align: center;
+    font-size: 40px;
+}
+
+.home-text {
+    text-align: center;
+    font-size: 20px;
+}
+
+.img-pill1 {
+    position: fixed;
+    width: 215px;
+    height: 175px;
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+.img-pill2 {
+    position: fixed;
+    width: 106px;
+    height: 142px;
+    margin-top: 25%;
+    margin-left: 18%;
+}
+
+.img-pill3 {
+    position: fixed;
+    width: 145px;
+    height: 151px;
+    margin-top: 6%;
+    margin-left: 70%;
+}
+
+.img-pill4 {
+    position: fixed;
+    width: 230px;
+    height: 190px;
+    margin-top: 21%;
+    margin-left: 65%;
+}
+
+.input-form {
+    border: 1px solid #1D0D8D;
+    border-radius: 8px;
+    padding: 12px;
+    width: 400px;
+}
+
+.form-wrapper {
+    display: grid;
+    place-items: center;
+}
+
+.go-sign-up {
+    color: #FC462D;
+    font-size: 18px;
+}
+
+.profile-wrapper {
+    display: grid;
+    place-items: center;
+    height: 70vh;
+}
+
+.profile-content {
+    border: 1px solid #1D0D8D;
+    padding: 16px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-text {
+    color: black;
+}
