@@ -8,9 +8,11 @@ import ru.itis.deshevin.dto.DrugDto;
 import ru.itis.deshevin.mappers.DrugMapper;
 import ru.itis.deshevin.models.AnalogueClassEntity;
 import ru.itis.deshevin.models.DrugEntity;
+import ru.itis.deshevin.models.FileInfoEntity;
 import ru.itis.deshevin.repositories.DrugRepository;
 import ru.itis.deshevin.services.CategoryService;
 import ru.itis.deshevin.services.DrugService;
+import ru.itis.deshevin.services.FilesService;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,18 +22,24 @@ import java.util.stream.Collectors;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class DrugServiceImpl implements DrugService {
+public class    DrugServiceImpl implements DrugService {
 
     private final DrugMapper drugMapper;
     private final DrugRepository drugRepository;
     private final CategoryService categoryService;
+    private final FilesService filesService;
 
     @Override
     @Transactional
     public void saveDrug(AddDrugDto addDrugDto) {
         log.info("Start saving drug = " + addDrugDto);
+        FileInfoEntity newFile = null;
+        if (addDrugDto.getFile() != null) {
+            newFile = filesService.saveFileToStorage(addDrugDto.getFile()).get();
+        }
         DrugEntity newDrug = drugMapper.toDrugEntity(addDrugDto);
         newDrug.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
+        newDrug.setPhoto(newFile);
         drugRepository.save(newDrug);
         log.info("Finish saving drug");
     }
@@ -49,6 +57,10 @@ public class DrugServiceImpl implements DrugService {
                             .build()
             );
         }
+        FileInfoEntity newFile = null;
+        if (addDrugDto.getFile() != null) {
+            newFile = filesService.saveFileToStorage(addDrugDto.getFile()).get();
+        }
         if (!addDrugDto.getCategoryIdList().isEmpty()) {
             drugEntity.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
         }
@@ -62,6 +74,7 @@ public class DrugServiceImpl implements DrugService {
         drugEntity.setEffect(addDrugDto.getEffect());
         drugEntity.setInstruction(addDrugDto.getInstruction());
         drugEntity.setStorageConditions(addDrugDto.getStorageConditions());
+        drugEntity.setPhoto(newFile);
         drugRepository.save(drugEntity);
         log.info("Finish updating drug");
     }

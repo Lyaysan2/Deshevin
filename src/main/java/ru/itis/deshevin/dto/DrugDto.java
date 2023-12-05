@@ -1,8 +1,8 @@
 package ru.itis.deshevin.dto;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,4 +26,6 @@ public class DrugDto {
 
     private Set<CategoryDto> category;
     private String analogueClass;
+
+    private String drugImageFileDBID;
 }

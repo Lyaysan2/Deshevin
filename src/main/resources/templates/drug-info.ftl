@@ -10,11 +10,11 @@
 
     <#include "components/links.ftl">
 
-<#--todo-->
+    <#--todo-->
     <script>
-        function isCategorySelected(name, drug){
+        function isCategorySelected(name, drug) {
             console.log(drug);
-            if (drug.category.size!==0){
+            if (drug.category.size !== 0) {
                 console.log(drug.category);
                 return true;
                 // return name.contains(drug.category);
@@ -38,14 +38,14 @@
                         <input class="form-control mb-2" name="title" value="${drug.title}" type="text">
                     </p>
                     <p><strong>Категория:</strong>
-<#--                        todo: список категорий с нужными checked -->
-<#--                        <#list categories as category>-->
-<#--                            <div class="form-check form-check-inline">-->
-<#--                                <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"-->
-<#--                                       value="${category.id}" ${isCategorySelected(category.name, drug) ? "checked": ''}>-->
-<#--                                <label class="form-check-label" for="inlineCheckbox">${category.name}</label>-->
-<#--                            </div>-->
-<#--                        </#list>-->
+                        <#--                        todo: список категорий с нужными checked -->
+                        <#--                        <#list categories as category>-->
+                        <#--                            <div class="form-check form-check-inline">-->
+                        <#--                                <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"-->
+                        <#--                                       value="${category.id}" ${isCategorySelected(category.name, drug) ? "checked": ''}>-->
+                        <#--                                <label class="form-check-label" for="inlineCheckbox">${category.name}</label>-->
+                        <#--                            </div>-->
+                        <#--                        </#list>-->
                         <select multiple name="categoryIdList" class="custom-select mr-sm-2"
                                 id="inlineFormCustomSelect">
                             <option value="" multiple="multiple" selected> <#if drug.category??>
@@ -59,7 +59,7 @@
                             </#list>
                         </select>
                     </p>
-<#--                    todo: класс аналог с нужным выделенным-->
+                    <#--                    todo: класс аналог с нужным выделенным-->
                     <p><strong>Класс аналог:</strong>
                         <select name="analogueId" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                             <option name="analogueId" value=""
@@ -99,6 +99,12 @@
                         <p><strong>Условия хранения:</strong></p>
                         <textarea class="form-control" id="drugStorageConditions" rows="3"
                                   name="storageConditions">${drug.storageConditions}</textarea>
+                        <p><strong>Изображение:</strong></p>
+                        <#if drug.drugImageFileDBID??>
+                            <img class="photo" alt="IMAGE" src="/files/${drug.drugImageFileDBID}"/>
+                        <#else>
+                            <img class="photo" alt="IMAGE" src="/static/img/no-image.png"/>
+                        </#if>
                     </div>
                 </div>
                 <div class="d-flex justify-content-around">
@@ -152,6 +158,13 @@
                     <label for="analogue-class" class="drug-info">Класс
                         аналог: <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></label>
                 </div>
+                <label for="image" class="drug-info"> Изображение:
+                    <#if drug.drugImageFileDBID??>
+                        <img class="photo" alt="IMAGE" src="/files/${drug.drugImageFileDBID}"/>
+                    <#else>
+                        <img class="photo" alt="IMAGE" src="/img/no-image.png"/>
+                    </#if>
+                </label>
             </main>
         </#if>
     </div>

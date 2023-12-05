@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itis.deshevin.dto.DrugDto;
 import ru.itis.deshevin.dto.SignUpDto;
 import ru.itis.deshevin.dto.UserDto;
 import ru.itis.deshevin.enums.Role;
