@@ -28,17 +28,10 @@ public class SearchController {
     public String getAnalogueClassPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model,
                                        @RequestParam Optional<String> prefixParam) {
         String prefix = prefixParam.orElse("");
-        System.err.println("prefix: " + prefix);
         model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
         model.addAttribute("drugs", drugService.getAllDrugs(prefix));
         return "search-drug";
     }
-
-//    @GetMapping("/prefix/{prefix}")
-//    @ResponseBody
-//    public List<DrugDto> findAllDrugsByPrefix(@PathVariable String prefix) {
-//        return searchService.getDrugsByNameStartsWith(prefix);
-//    }
 
     @GetMapping("/analogue/{id}")
     public String getAnalogueClassPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails,
