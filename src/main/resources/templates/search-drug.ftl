@@ -7,35 +7,35 @@
     <meta name="author" content="Ф. Гусев">
     <title>Поиск препаратов</title>
     <#include "components/links.ftl">
-    <script>
-        function updateList() {
-            $.getJSON('/search/prefix/'+document.getElementById('prefix_text').value, function(data) {
-                const old_tbody = document.getElementById("content-tbody")
-                const new_tbody = document.createElement('tbody');
-                new_tbody.setAttribute("id", "content-tbody")
-                old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
-                for(var i in data) {
-                    var tbodyRef = document.getElementById("content-table").getElementsByTagName('tbody')[0];
-                    var newRow = tbodyRef.insertRow();
+<#--    <script>-->
+<#--        function updateList() {-->
+<#--            $.getJSON('/search/prefix/'+document.getElementById('prefix_text').value, function(data) {-->
+<#--                const old_tbody = document.getElementById("content-tbody")-->
+<#--                const new_tbody = document.createElement('tbody');-->
+<#--                new_tbody.setAttribute("id", "content-tbody")-->
+<#--                old_tbody.parentNode.replaceChild(new_tbody, old_tbody)-->
+<#--                for(var i in data) {-->
+<#--                    var tbodyRef = document.getElementById("content-table").getElementsByTagName('tbody')[0];-->
+<#--                    var newRow = tbodyRef.insertRow();-->
 
-                    var newCellTitle = newRow.insertCell();
-                    var titleLink = document.createElement('a');
-                    titleLink.innerHTML = '<a href="/drug/'+data[i].id+'">'+data[i].title+'</a>';
-                    newCellTitle.appendChild(titleLink);
+<#--                    var newCellTitle = newRow.insertCell();-->
+<#--                    var titleLink = document.createElement('a');-->
+<#--                    titleLink.innerHTML = '<a href="/drug/'+data[i].id+'">'+data[i].title+'</a>';-->
+<#--                    newCellTitle.appendChild(titleLink);-->
 
-                    newRow.insertCell().appendChild(document.createTextNode(data[i].description + '...'));
-                    newRow.insertCell().appendChild(document.createTextNode(data[i].category));
-                    newRow.insertCell().appendChild(document.createTextNode(data[i].analogueClass));
+<#--                    newRow.insertCell().appendChild(document.createTextNode(data[i].description + '...'));-->
+<#--                    newRow.insertCell().appendChild(document.createTextNode(data[i].category));-->
+<#--                    newRow.insertCell().appendChild(document.createTextNode(data[i].analogueClass));-->
 
-                    var newCellAction = newRow.insertCell();
-                    var action = document.createElement('div');
-                    action.innerHTML = '<form action="/search/analogue/'+data[i].id+'">' +
-                                        '<button type="submit" class="btn">Просмотреть аналоги</button></form>';
-                    newCellAction.appendChild(action);
-                }
-            });
-        }
-    </script>
+<#--                    var newCellAction = newRow.insertCell();-->
+<#--                    var action = document.createElement('div');-->
+<#--                    action.innerHTML = '<form action="/search/analogue/'+data[i].id+'">' +-->
+<#--                                        '<button type="submit" class="btn">Просмотреть аналоги</button></form>';-->
+<#--                    newCellAction.appendChild(action);-->
+<#--                }-->
+<#--            });-->
+<#--        }-->
+<#--    </script>-->
     <script>
         function delet(id) {
             jQuery.ajax({
@@ -82,9 +82,13 @@
         <h1>Поиск препаратов</h1>
     </div>
 
-    <input id="prefix_text" placeholder="Начните писать название..." onchange="updateList()"/>
-    И нажмите enter...
-    <hr>
+    <form action="/search" method="get">
+        <p>
+            <label for="name">Напишите название:</label>
+            <input type="text" name="prefixParam" id="prefixParam">
+            <input type="submit" value="Поиск">
+        </p>
+    </form>
 
     <table class="table" id="content-table">
         <thead class="thead-light bg-info">

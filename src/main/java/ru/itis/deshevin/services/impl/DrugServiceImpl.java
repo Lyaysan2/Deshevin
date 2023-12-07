@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class    DrugServiceImpl implements DrugService {
+public class DrugServiceImpl implements DrugService {
 
     private final DrugMapper drugMapper;
     private final DrugRepository drugRepository;
@@ -80,9 +80,9 @@ public class    DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public List<DrugDto> getAllDrugs() {
-        log.info("Get all drug info ...");
-        List<DrugDto> drugDtoList = drugMapper.toDrugListDto(drugRepository.findAll())
+    public List<DrugDto> getAllDrugs(String prefix) {
+        log.info("Drug search by prefix {}", prefix);
+        List<DrugDto> drugDtoList = drugMapper.toDrugListDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
                 .stream()
                 .peek(
                         drug -> drug.setDescription(drug.getDescription().substring(0, Integer.min(100, drug.getDescription().length())))

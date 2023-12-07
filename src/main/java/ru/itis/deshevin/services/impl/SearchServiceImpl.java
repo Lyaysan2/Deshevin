@@ -34,12 +34,12 @@ public class SearchServiceImpl implements SearchService {
                 )
                 .limit(50L).collect(Collectors.toList()));
     }
-
-    @Override
-    public List<DrugDto> getDrugsByNameStartsWith(String prefix) {
-        log.info("Drug search by prefix {}", prefix);
-        return drugMapper.toDrugListDto(drugRepository.findAllByTitleLike(prefix + "%"));
-    }
+//
+//    @Override
+//    public List<DrugDto> getDrugsByNameStartsWith(String prefix) {
+//        log.info("Drug search by prefix {}", prefix);
+//        return drugMapper.toDrugListDto(drugRepository.findAllByTitleLike(prefix + "%"));
+//    }
 
     @Override
     public List<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId) {
