@@ -58,6 +58,14 @@
             });
         }
     </script>
+    <style>
+        .avatar {
+            width: 200px;
+            height: 200px;
+            display: inline;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body class="text-center">
     <#include "components/header.ftl">
@@ -81,6 +89,7 @@
     <table class="table" id="content-table">
         <thead class="thead-light bg-info">
         <tr>
+            <th scope="col">Фото</th>
             <th scope="col">Название</th>
             <th scope="col">Описание</th>
             <th scope="col">Категория</th>
@@ -91,6 +100,11 @@
         <tbody id="content-tbody">
         <#list drugs as drug>
             <tr>
+                <#if (drug.drugImageFileDBID)??>
+                    <td scope="row"><img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar"></td>
+                <#else>
+                    <td scope="row"><img src="/img/no-image.png" alt="avatar" class="avatar"/></td>
+                </#if>
                 <td><a href="/drug/${drug.id}">${drug.title}</a></td>
                 <td>${drug.description}...</td>
                 <td>
@@ -110,9 +124,6 @@
                             <button type="submit" onclick="delet('${drug.id}')" class="btn">Удалить из избранных</button>
                         <#else>
                             <button type="submit" onclick="addToFav('${drug.id}')" class="btn">Добавить в избранные</button>
-<#--                            <form action="/favourites/add-to-favourites/${drug.id}" method="post" id="addToFavourite">-->
-<#--                                <button type="submit" class="btn">Добавить в избранное</button>-->
-<#--                            </form>-->
                         </#if>
                     </#if>
                     <!-- Может быть, будет использовано позднее

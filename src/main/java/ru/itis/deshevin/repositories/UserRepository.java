@@ -6,6 +6,6 @@ import ru.itis.deshevin.models.UserEntity;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserEntityRepository extends JpaRepository<UserEntity, UUID> {
+public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> findByEmail(String email);
 }

@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.deshevin.dto.DrugDto;
 import ru.itis.deshevin.mappers.DrugMapper;
 import ru.itis.deshevin.models.DrugEntity;
-import ru.itis.deshevin.models.UserEntity;
 import ru.itis.deshevin.repositories.DrugRepository;
-import ru.itis.deshevin.repositories.UserEntityRepository;
-import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.SearchService;
 
 import java.util.ArrayList;
@@ -24,7 +21,6 @@ import java.util.stream.Collectors;
 public class SearchServiceImpl implements SearchService {
 
     private final DrugRepository drugRepository;
-    private final UserEntityRepository userEntityRepository;
 
     private final DrugMapper drugMapper;
 
@@ -55,15 +51,6 @@ public class SearchServiceImpl implements SearchService {
         }
         DrugEntity drug = optionalDrug.get();
         return drugMapper.toDrugListDto(drugRepository.findAllByAnalogueClass(drug.getAnalogueClass()));
-    }
-
-    @Override
-    public Optional<UserEntity> getUserByAuth(UserEntityDetails userEntityDetails) {
-        if (userEntityDetails == null){
-            return Optional.empty();
-        } else {
-            return userEntityRepository.findById(userEntityDetails.getUserEntity().getId());
-        }
     }
 
 //    @Override

@@ -22,18 +22,60 @@
             return false;
         }
     </script>
+    <script>
+        function delet(id) {
+            jQuery.ajax({
+                url: '/favourites/delete-from-favourites/' + id,
+                type: 'delete',
+                success: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+    <script>
+        function addToFav(id) {
+            jQuery.ajax({
+                url: '/favourites/add-to-favourites/' + id,
+                type: 'post',
+                success: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+    <style>
+        .avatar {
+            width: 200px;
+            height: 200px;
+            display: inline;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body class="text-center">
 <#include "components/header.ftl">
+<#function inFavorites(user, drug)>
+    <#list user.favorites as userFavDrugs>
+        <#if userFavDrugs.title == drug.title>
+            <#return true>
+        </#if>
+    </#list>
+    <#return false>
+</#function>
 <main class="container">
-
     <h2>${drug.title}</h2>
     <div class="row justify-content-md-center">
         <#if user.role == 'ADMIN'>
             <form method="post" action="" class="drug-form" enctype="multipart/form-data">
                 <div class="col">
                     <div class="alert alert-info" role="alert">Информация</div>
+                    <#if (drug.drugImageFileDBID)??>
+                        <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                    <#else>
+                        <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                    </#if>
                     <p><strong>Название:</strong>
                         <input class="form-control mb-2" name="title" value="${drug.title}" type="text">
                     </p>
@@ -99,12 +141,6 @@
                         <p><strong>Условия хранения:</strong></p>
                         <textarea class="form-control" id="drugStorageConditions" rows="3"
                                   name="storageConditions">${drug.storageConditions}</textarea>
-                        <p><strong>Изображение:</strong></p>
-                        <#if drug.drugImageFileDBID??>
-                            <img class="photo" alt="IMAGE" src="/files/${drug.drugImageFileDBID}"/>
-                        <#else>
-                            <img class="photo" alt="IMAGE" src="/static/img/no-image.png"/>
-                        </#if>
                     </div>
                 </div>
                 <div class="d-flex justify-content-around">
@@ -112,11 +148,18 @@
                 </div>
             </form>
         <#elseif user.role == 'COMMON_USER'>
-            <form action="/favourites/add-to-favourites/${drug.id}" method="post">
-                <button type="submit" class="btn">Добавить в избранное</button>
-            </form>
             <main class="container">
+                <#if inFavorites(user, drug)>
+                    <button type="submit" onclick="delet('${drug.id}')" class="btn">Удалить из избранных</button>
+                <#else>
+                    <button type="submit" onclick="addToFav('${drug.id}')" class="btn">Добавить в избранные</button>
+                </#if>
                 <div class="alert alert-info" role="alert">Информация</div>
+                <#if (drug.drugImageFileDBID)??>
+                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                <#else>
+                    <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                </#if>
                 <div class="mb-3">
                     <label for="title" class="drug-info">Название: ${drug.title}</label>
                 </div>
@@ -158,13 +201,6 @@
                     <label for="analogue-class" class="drug-info">Класс
                         аналог: <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></label>
                 </div>
-                <label for="image" class="drug-info"> Изображение:
-                    <#if drug.drugImageFileDBID??>
-                        <img class="photo" alt="IMAGE" src="/files/${drug.drugImageFileDBID}"/>
-                    <#else>
-                        <img class="photo" alt="IMAGE" src="/img/no-image.png"/>
-                    </#if>
-                </label>
             </main>
         </#if>
     </div>
