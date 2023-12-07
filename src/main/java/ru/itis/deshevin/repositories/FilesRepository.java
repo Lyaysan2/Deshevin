@@ -1,5 +1,6 @@
 package ru.itis.deshevin.repositories;
 
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.itis.deshevin.models.FileInfoEntity;
 

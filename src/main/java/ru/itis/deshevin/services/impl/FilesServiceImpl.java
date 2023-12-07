@@ -1,6 +1,8 @@
 package ru.itis.deshevin.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.jni.FileInfo;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +11,12 @@ import ru.itis.deshevin.models.FileInfoEntity;
 import ru.itis.deshevin.repositories.FilesRepository;
 import ru.itis.deshevin.services.FilesService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -47,4 +54,19 @@ public class FilesServiceImpl implements FilesService {
             throw new IllegalArgumentException(e);
         }
     }
+
+    @Override
+    public void addFileToResponse(String fileName, HttpServletResponse response) {
+        FileInfoEntity file = filesRepository.findByFileDBID(fileName).orElseThrow();
+        response.setContentLength(file.getSize());
+        response.setContentType(file.getType());
+        response.setHeader("Content-Disposition", ": attachment; filename=\"" + URLEncoder.encode(file.getOriginalFileName(), StandardCharsets.UTF_8) + "\"");
+        try {
+            IOUtils.copy(new FileInputStream(storagePath + "/" + file.getFileDBID()), response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
 }

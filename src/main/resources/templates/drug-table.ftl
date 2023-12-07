@@ -49,7 +49,7 @@
             <tr id="my-tr-${drug.id}">
                 <th scope="row">${drug?index + 1}</th>
                 <#if (drug.drugImageFileDBID)??>
-                    <th scope="row"><img src="/files/${drug.drugImageFileDBID}?${random}" alt="avatar" class="avatar"></th>
+                    <th scope="row"><img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar"></th>
                 <#else>
                     <th scope="row"><img src="/img/no-image.png" alt="avatar" class="avatar"/></th>
                 </#if>
