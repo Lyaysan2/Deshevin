@@ -11,6 +11,7 @@ import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.AnalogueClassService;
 import ru.itis.deshevin.services.CategoryService;
 import ru.itis.deshevin.services.DrugService;
+import ru.itis.deshevin.services.UserService;
 
 import java.util.UUID;
 
@@ -22,6 +23,8 @@ public class DrugController {
     private final AnalogueClassService analogueClassService;
     private final CategoryService categoryService;
     private final DrugService drugService;
+    private final UserService userService;
+
 
     @GetMapping
     public String getAddDrugPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
@@ -47,7 +50,7 @@ public class DrugController {
 
     @GetMapping("/{drug-id}")
     public String getDrugInfoPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, @PathVariable("drug-id") UUID id, Model model) {
-        model.addAttribute("user", userEntityDetails.getUserEntity());
+        model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
         model.addAttribute("categories", categoryService.getAllCategory());
         model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
         model.addAttribute("drug", drugService.getDrugById(id));

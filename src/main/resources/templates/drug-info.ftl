@@ -10,11 +10,11 @@
 
     <#include "components/links.ftl">
 
-<#--todo-->
+    <#--todo-->
     <script>
-        function isCategorySelected(name, drug){
+        function isCategorySelected(name, drug) {
             console.log(drug);
-            if (drug.category.size!==0){
+            if (drug.category.size !== 0) {
                 console.log(drug.category);
                 return true;
                 // return name.contains(drug.category);
@@ -22,30 +22,72 @@
             return false;
         }
     </script>
+    <script>
+        function delet(id) {
+            jQuery.ajax({
+                url: '/favourites/delete-from-favourites/' + id,
+                type: 'delete',
+                success: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+    <script>
+        function addToFav(id) {
+            jQuery.ajax({
+                url: '/favourites/add-to-favourites/' + id,
+                type: 'post',
+                success: function(){
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+    <style>
+        .avatar {
+            width: 200px;
+            height: 200px;
+            display: inline;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body class="text-center">
 <#include "components/header.ftl">
+<#function inFavorites(user, drug)>
+    <#list user.favorites as userFavDrugs>
+        <#if userFavDrugs.title == drug.title>
+            <#return true>
+        </#if>
+    </#list>
+    <#return false>
+</#function>
 <main class="container">
-
     <h2>${drug.title}</h2>
     <div class="row justify-content-md-center">
         <#if user.role == 'ADMIN'>
             <form method="post" action="" class="drug-form" enctype="multipart/form-data">
                 <div class="col">
                     <div class="alert alert-info" role="alert">Информация</div>
+                    <#if (drug.drugImageFileDBID)??>
+                        <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                    <#else>
+                        <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                    </#if>
                     <p><strong>Название:</strong>
                         <input class="form-control mb-2" name="title" value="${drug.title}" type="text">
                     </p>
                     <p><strong>Категория:</strong>
-<#--                        todo: список категорий с нужными checked -->
-<#--                        <#list categories as category>-->
-<#--                            <div class="form-check form-check-inline">-->
-<#--                                <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"-->
-<#--                                       value="${category.id}" ${isCategorySelected(category.name, drug) ? "checked": ''}>-->
-<#--                                <label class="form-check-label" for="inlineCheckbox">${category.name}</label>-->
-<#--                            </div>-->
-<#--                        </#list>-->
+                        <#--                        todo: список категорий с нужными checked -->
+                        <#--                        <#list categories as category>-->
+                        <#--                            <div class="form-check form-check-inline">-->
+                        <#--                                <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"-->
+                        <#--                                       value="${category.id}" ${isCategorySelected(category.name, drug) ? "checked": ''}>-->
+                        <#--                                <label class="form-check-label" for="inlineCheckbox">${category.name}</label>-->
+                        <#--                            </div>-->
+                        <#--                        </#list>-->
                         <select multiple name="categoryIdList" class="custom-select mr-sm-2"
                                 id="inlineFormCustomSelect">
                             <option value="" multiple="multiple" selected> <#if drug.category??>
@@ -59,7 +101,7 @@
                             </#list>
                         </select>
                     </p>
-<#--                    todo: класс аналог с нужным выделенным-->
+                    <#--                    todo: класс аналог с нужным выделенным-->
                     <p><strong>Класс аналог:</strong>
                         <select name="analogueId" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                             <option name="analogueId" value=""
@@ -106,11 +148,18 @@
                 </div>
             </form>
         <#elseif user.role == 'COMMON_USER'>
-            <form action="/favourites/add-to-favourites/${drug.id}" method="post">
-                <button type="submit" class="btn">Добавить в избранное</button>
-            </form>
             <main class="container">
+                <#if inFavorites(user, drug)>
+                    <button type="submit" onclick="delet('${drug.id}')" class="btn">Удалить из избранных</button>
+                <#else>
+                    <button type="submit" onclick="addToFav('${drug.id}')" class="btn">Добавить в избранные</button>
+                </#if>
                 <div class="alert alert-info" role="alert">Информация</div>
+                <#if (drug.drugImageFileDBID)??>
+                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                <#else>
+                    <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                </#if>
                 <div class="mb-3">
                     <label for="title" class="drug-info">Название: ${drug.title}</label>
                 </div>

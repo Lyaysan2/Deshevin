@@ -16,8 +16,6 @@ public interface SearchService {
 
     List<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId);
 
-    Optional<UserEntity> getUserByAuth(UserEntityDetails userEntityDetails);
-
 //    List<DrugDto> getDrugsWithSameCategoryAs(UUID drugId);
 
 }

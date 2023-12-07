@@ -9,6 +9,7 @@ import ru.itis.deshevin.dto.AnalogueClassDto;
 import ru.itis.deshevin.dto.CategoryDto;
 import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.AnalogueClassService;
+import ru.itis.deshevin.services.UserService;
 
 import java.util.UUID;
 
@@ -18,10 +19,11 @@ import java.util.UUID;
 public class AnalogueClassController {
 
     private final AnalogueClassService analogueClassService;
+    private final UserService userService;
 
     @GetMapping
     public String getAnalogueClassPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
-        model.addAttribute("user", userEntityDetails.getUserEntity());
+        model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
         model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
         return "analogue";
     }

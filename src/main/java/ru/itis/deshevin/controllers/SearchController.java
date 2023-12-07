@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ru.itis.deshevin.dto.DrugDto;
 import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.SearchService;
+import ru.itis.deshevin.services.UserService;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,10 +22,11 @@ import java.util.UUID;
 public class SearchController {
 
     private final SearchService searchService;
+    private final UserService userService;
 
     @GetMapping
     public String getAnalogueClassPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
-        model.addAttribute("user", searchService.getUserByAuth(userEntityDetails).orElse(null));
+        model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
         model.addAttribute("drugs", searchService.getDrugsForPreview());
         return "search-drug";
     }

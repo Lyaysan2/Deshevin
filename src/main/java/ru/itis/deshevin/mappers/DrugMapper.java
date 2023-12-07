@@ -18,6 +18,7 @@ public interface DrugMapper {
 
     @Mapping(target = "category", source = "drugsCategory")
     @Mapping(target = "analogueClass", source = "analogueClass.title")
+    @Mapping(target = "drugImageFileDBID", source = "photo.fileDBID")
     DrugDto toDrugDto(DrugEntity drugEntity);
 
     List<DrugDto> toDrugListDto(List<DrugEntity> drugEntityList);

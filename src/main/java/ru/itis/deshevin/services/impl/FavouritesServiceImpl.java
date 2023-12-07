@@ -8,7 +8,7 @@ import ru.itis.deshevin.mappers.DrugMapper;
 import ru.itis.deshevin.models.DrugEntity;
 import ru.itis.deshevin.models.UserEntity;
 import ru.itis.deshevin.repositories.DrugRepository;
-import ru.itis.deshevin.repositories.UserEntityRepository;
+import ru.itis.deshevin.repositories.UserRepository;
 import ru.itis.deshevin.services.FavouritesService;
 
 import java.util.List;
@@ -20,35 +20,35 @@ import java.util.UUID;
 public class FavouritesServiceImpl implements FavouritesService {
 
     private final DrugRepository drugRepository;
-    private final UserEntityRepository userEntityRepository;
+    private final UserRepository userRepository;
     private final DrugMapper drugMapper;
 
     @Override
     public void addDrugToFavourites(UUID userId, UUID drugId) {
-        UserEntity user = userEntityRepository.findById(userId).orElseThrow();
+        UserEntity user = userRepository.findById(userId).orElseThrow();
         DrugEntity drug = drugRepository.findById(drugId).orElseThrow();
 
         if(!user.getFavorites().contains(drug)) user.getFavorites().add(drug);
 
-        userEntityRepository.save(user);
+        userRepository.save(user);
         log.info("Successfuly add drug: " + drug + "to account: " + user);
     }
 
     @Override
     public List<DrugDto> getFavouriteDrugs(UUID userId) {
-        UserEntity user = userEntityRepository.findById(userId).orElseThrow();
+        UserEntity user = userRepository.findById(userId).orElseThrow();
         log.info("Successfuly return list of drugs for account: " + user);
         return drugMapper.toDrugListDto(user.getFavorites());
     }
 
     @Override
     public void deleteDrugFromFavourites(UUID userId, UUID drugId) {
-        UserEntity user = userEntityRepository.findById(userId).orElseThrow();
+        UserEntity user = userRepository.findById(userId).orElseThrow();
         DrugEntity drug = drugRepository.findById(drugId).orElseThrow();
 
         user.getFavorites().remove(drug);
 
-        userEntityRepository.save(user);
+        userRepository.save(user);
         log.info("Successfuly delete drug: " + drug + "from account: " + user);
     }
 }
