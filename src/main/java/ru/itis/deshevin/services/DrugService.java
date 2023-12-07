@@ -11,7 +11,7 @@ public interface DrugService {
 
     void updateDrug(AddDrugDto addDrugDto, UUID id);
 
-    List<DrugDto> getAllDrugs();
+    List<DrugDto> getAllDrugs(String prefix);
 
     DrugDto getDrugById(UUID id);
 

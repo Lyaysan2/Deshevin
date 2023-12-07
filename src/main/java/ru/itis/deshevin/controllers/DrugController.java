@@ -13,6 +13,7 @@ import ru.itis.deshevin.services.CategoryService;
 import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.UserService;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -44,7 +45,7 @@ public class DrugController {
     @GetMapping("/all")
     public String getAllDrugsPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userEntityDetails.getUserEntity());
-        model.addAttribute("drugs", drugService.getAllDrugs());
+        model.addAttribute("drugs", drugService.getAllDrugs(""));
         return "drug-table";
     }
 
