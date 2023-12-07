@@ -18,7 +18,14 @@
             document.getElementById("my-tr-" + id).hidden = true
         }
     </script>
-
+    <style>
+        .avatar {
+            width: 200px;
+            height: 200px;
+            display: inline;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
 <#include "components/header.ftl">
@@ -29,6 +36,7 @@
         <thead class="thead-light bg-info">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Фото</th>
             <th scope="col">Название</th>
             <th scope="col">Описание</th>
             <th scope="col">Категория</th>
@@ -40,6 +48,11 @@
         <#list drugs as drug>
             <tr id="my-tr-${drug.id}">
                 <th scope="row">${drug?index + 1}</th>
+                <#if (drug.drugImageFileDBID)??>
+                    <th scope="row"><img src="/files/${drug.drugImageFileDBID}?${random}" alt="avatar" class="avatar"></th>
+                <#else>
+                    <th scope="row"><img src="/img/no-image.png" alt="avatar" class="avatar"/></th>
+                </#if>
                 <td><a href="/drug/${drug.id}">${drug.title}</a></td>
                 <td>${drug.description}</td>
                 <td>

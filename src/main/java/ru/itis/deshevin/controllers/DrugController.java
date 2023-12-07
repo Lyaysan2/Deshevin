@@ -42,6 +42,7 @@ public class DrugController {
     public String getAllDrugsPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userEntityDetails.getUserEntity());
         model.addAttribute("drugs", drugService.getAllDrugs());
+        model.addAttribute("random", Math.random());
         return "drug-table";
     }
 
