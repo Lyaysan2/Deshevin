@@ -51,6 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Set<CategoryEntity> getCategoriesById(Set<String> categoriesId) {
-        return (Set<CategoryEntity>) categoryRepository.findAllById(categoriesId.stream().map(UUID::fromString).collect(Collectors.toSet()));
+        return new HashSet<>(categoryRepository.findAllById(categoriesId.stream().map(UUID::fromString)
+                .collect(Collectors.toSet())));
     }
 }
