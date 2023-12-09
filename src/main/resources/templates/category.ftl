@@ -26,41 +26,27 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <div class="container">
-    <h1>Панель категорий</h1>
-</div>
-
-<ul class="list-group">
+    <h1>Категории</h1>
+    <section class="py-5">
+        <form class="form-add" method="post" action="/category" enctype="multipart/form-data">
+            <div class="form-group mx-sm-3 mb-2">
+                <input class="input-form" name="name" id="inputCategory" type="text" placeholder="Введите категорию">
+            </div>
+            <button type="submit" class="btn">Добавить</button>
+        </form>
+    </section>
+    <br>
     <#list categories as category>
-        <div class="row">
-            <div class="col">
-            <li CLASS="list-group-item" style = "position:relative; left:400px; top:10px "  id=${category.id}>${category.name}</li>
-            </div>
-            <div class="col">
-            <button type="submit" onclick="delet('${category.id}')" style = "position:relative; left:10px; top:15px" class="btn btn-danger">Удалить</button>
-            </div>
+        <div class="item-row">
+            <div id=${category.id}>${category.name}</div>
+            <button type="submit" onclick="delet('${category.id}')" class="btn-delete">Удалить</button>
         </div>
     </#list>
-</ul>
+</div>
 
-<section class="py-5">
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
 
-                <form class="form-inline" method="post" action="/category" enctype="multipart/form-data">
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputCategory" style = "position:relative; right:10px;"> Категория </label>
-                        <input class="form-control form-control-lg" name="name" id="inputCategory" type="text" placeholder="Категория">
-                    </div>
-                    <button type="submit" class="btn btn-info mb-2">Добавить</button>
-                </form>
 
-            </div>
-        </div>
-    </div>
-</section>
-
-<#include "components/footer.ftl" >
+<#--<#include "components/footer.ftl" >-->
 
 
 </body>

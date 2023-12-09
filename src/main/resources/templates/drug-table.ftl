@@ -35,8 +35,8 @@
     <table class="table">
         <thead class="thead-light bg-info">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Фото</th>
+<#--            <th scope="col">#</th>-->
+<#--            <th scope="col">Фото</th>-->
             <th scope="col">Название</th>
             <th scope="col">Описание</th>
             <th scope="col">Категория</th>
@@ -47,13 +47,17 @@
 
         <#list drugs as drug>
             <tr id="my-tr-${drug.id}">
-                <th scope="row">${drug?index + 1}</th>
-                <#if (drug.drugImageFileDBID)??>
-                    <th scope="row"><img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar"></th>
-                <#else>
-                    <th scope="row"><img src="/img/no-image.png" alt="avatar" class="avatar"/></th>
-                </#if>
-                <td><a href="/drug/${drug.id}">${drug.title}</a></td>
+<#--                <th scope="row">${drug?index + 1}</th>-->
+                <td style="width: 300px">
+                    <div class="title-photo">
+                        <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
+                        <#if (drug.drugImageFileDBID)??>
+                            <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                        <#else>
+                            <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                        </#if>
+                    </div>
+                </td>
                 <td>${drug.description}</td>
                 <td>
                     <#if (drug.category)??>
@@ -75,7 +79,7 @@
 </main>
 
 
-<#include "components/footer.ftl" >
+<#--<#include "components/footer.ftl" >-->
 
 </body>
 </html>

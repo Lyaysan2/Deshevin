@@ -25,17 +25,6 @@ public class SearchServiceImpl implements SearchService {
     private final DrugMapper drugMapper;
 
     @Override
-    public List<DrugDto> getDrugsForPreview() {
-        log.info("Get drugs for preview");
-        return drugMapper.toDrugListDto(drugRepository.findAll()
-                .stream()
-                .peek(
-                        drug -> drug.setDescription(drug.getDescription().substring(0, Integer.min(100, drug.getDescription().length())))
-                )
-                .limit(50L).collect(Collectors.toList()));
-    }
-
-    @Override
     public List<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId) {
         log.info("Search for drugs in same analogue class with {}", drugId);
         Optional<DrugEntity> optionalDrug = drugRepository.findById(drugId);

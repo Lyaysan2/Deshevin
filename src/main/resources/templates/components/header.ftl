@@ -23,9 +23,9 @@
 
                         <a class="navbar-text" href="/drug"/>Добавить лекарство</a>
 
-                        <a class="navbar-text" href="/analogue"/>Добавить класс аналоги</a>
+                        <a class="navbar-text" href="/analogue"/>Классы аналогов</a>
 
-                        <a class="navbar-text" href="/category"/>Добавить категорию</a>
+                        <a class="navbar-text" href="/category"/>Категории</a>
                     </#if>
 
                     <a class="navbar-text" href="/profile"/>Профиль (${user.username})</a>

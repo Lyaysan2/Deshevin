@@ -13,8 +13,8 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <h1>Профиль</h1>
     <div class="profile-wrapper">
+        <h1>Профиль</h1>
         <div class="profile-content">
             <div class="profile-info">
                 <p>Имя пользователя:&nbsp;</p>
@@ -37,21 +37,6 @@
                 <p class="profile-text">${user.email}</p>
             </div>
 
-<#--            <div class="mb-3">-->
-<#--                <label for="username" class="user-info">Имя пользователя: ${user.username}</label>-->
-<#--            </div>-->
-<#--            <div class="mb-3">-->
-<#--                <label for="firstName" class="user-info">Имя: ${user.firstName}</label>-->
-<#--            </div>-->
-<#--            <div class="mb-3">-->
-<#--                <label for="lastName" class="user-info">Фамилия: ${user.lastName}</label>-->
-<#--            </div>-->
-<#--            <div class="mb-3">-->
-<#--                <label for="city" class="user-info">Город: ${user.city}</label>-->
-<#--            </div>-->
-<#--            <div class="mb-3">-->
-<#--                <label for="email" class="user-info">Электронная почта: ${user.email}</label>-->
-<#--            </div>-->
         </div>
 
         <div>

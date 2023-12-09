@@ -8,19 +8,19 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>Панель добавления лекарств</title>
 
-    <style>
-        .drug-form {
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-        }
+<#--    <style>-->
+<#--        .drug-form {-->
+<#--            margin-left: auto;-->
+<#--            margin-right: auto;-->
+<#--            width: 50%;-->
+<#--        }-->
 
-        .brd {
-            border: 4px double black; /* Параметры границы */
-            padding: 10px; /* Поля вокруг текста */
-        }
+<#--        .brd {-->
+<#--            border: 4px double black; /* Параметры границы */-->
+<#--            padding: 10px; /* Поля вокруг текста */-->
+<#--        }-->
 
-    </style>
+<#--    </style>-->
 
 
     <#include "components/links.ftl">
@@ -28,101 +28,99 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <div class="container">
-        <h1>Панель добавления лекарств</h1>
-    </div>
+    <div class="home-content">
+        <h1>Добавить лекарство</h1>
 
-    <#if success??>
-        <div class="container">
+        <#if success??>
             <div class="alert alert-success" role="alert">
                 Лекарство успешно сохранено!
             </div>
-        </div>
-    </#if>
-    <#--    <c:choose>-->
-    <#--        <c:when test ="${message != null}">-->
-    <#--            <div class="container">-->
-    <#--                <div class="alert alert-success" role="alert">-->
-    <#--                    ${message}-->
-    <#--                </div>-->
-    <#--            </div>-->
-    <#--        </c:when>-->
-    <#--    </c:choose>-->
-    <form method="post" action="/drug" class="drug-form" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="drugTitle" class="form-label">Название лекарства</label>
-            <input type="text" class="form-control" id="drugTitle" name="title">
-        </div>
-        <div class="mb-3">
-            <label for="drugDescription" class="form-label">Описание</label>
-            <textarea class="form-control" id="drugDescription" rows="3" name="description"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugComposition" class="form-label">Состав</label>
-            <textarea class="form-control" id="drugComposition" rows="3" name="composition"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugManufacturer" class="form-label">Производитель</label>
-            <textarea class="form-control" id="drugManufacturer" rows="3" name="manufacturer"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugContraindications" class="form-label">Противопоказания</label>
-            <textarea class="form-control" id="drugContraindications" rows="3" name="contraindications"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugSideEffects" class="form-label">Побочные эффекты</label>
-            <textarea class="form-control" id="drugSideEffects" rows="3" name="sideEffects"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugReleaseForm" class="form-label">Форма выпуска</label>
-            <textarea class="form-control" id="drugReleaseForm" rows="3" name="releaseForm"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugEffect" class="form-label">Действие</label>
-            <textarea class="form-control" id="drugEffect" rows="3" name="effect"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugInstruction" class="form-label">Применение</label>
-            <textarea class="form-control" id="drugInstruction" rows="3" name="instruction"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugStorageConditions" class="form-label">Условия хранения</label>
-            <textarea class="form-control" id="drugStorageConditions" rows="3" name="storageConditions"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="drugImage" class="form-label">Загрузить фото</label>
-            <input name="file" type="file" accept=".jpg, .png, .jpeg" required>
-        </div>
-
-        <div>Категории лекарства</div>
-        <div class="brd">
-            <#list categories as category>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"
-                           value="${category.id}">
-                    <label class="form-check-label" for="inlineCheckbox">${category.name}</label>
+        </#if>
+        <form method="post" action="/drug" enctype="multipart/form-data" class="content">
+            <div>
+                <div class="mb-3">
+                    <h3>Название лекарства</h3>
+                    <input type="text" class="input-form" id="drugTitle" name="title">
                 </div>
-            </#list>
-        </div>
-
-        <div>Аналог класс</div>
-        <div class="brd">
-            <#list analogues as analogue>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="analogueId" id="inlineRadio"
-                           value="${analogue.id}">
-                    <label class="form-check-label" for="inlineRadio">${analogue.title}</label>
+                <div class="mb-3">
+                    <h3>Описание</h3>
+                    <textarea class="input-form" id="drugDescription" rows="3" name="description"></textarea>
                 </div>
-            </#list>
-        </div>
-        <br>
-        <br>
-        <input class="btn btn-info" type="submit" value="Сохранить">
+                <div class="mb-3">
+                    <h3>Состав</h3>
+                    <textarea class="input-form" id="drugComposition" rows="3" name="composition"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Производитель</h3>
+                    <textarea class="input-form" id="drugManufacturer" rows="3" name="manufacturer"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Противопоказания</h3>
+                    <textarea class="input-form" id="drugContraindications" rows="3" name="contraindications"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Побочные эффекты</h3>
+                    <textarea class="input-form" id="drugSideEffects" rows="3" name="sideEffects"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Форма выпуска</h3>
+                    <textarea class="input-form" id="drugReleaseForm" rows="3" name="releaseForm"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Действие</h3>
+                    <textarea class="input-form" id="drugEffect" rows="3" name="effect"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Применение</h3>
+                    <textarea class="input-form" id="drugInstruction" rows="3" name="instruction"></textarea>
+                </div>
+                <div class="mb-3">
+                    <h3>Условия хранения</h3>
+                    <textarea class="input-form" id="drugStorageConditions" rows="3" name="storageConditions"></textarea>
+                </div>
 
-    </form>
 
-    <#include "components/footer.ftl" >
+                <div class="input__wrapper">
+                    <input name="file" type="file" id="input__file" class="input input__file" accept=".jpg, .png, .jpeg" required>
+                    <label for="input__file" class="input__file-button">
+                        <span class="input__file-button-text">Загрузить изображение</span>
+                    </label>
+                </div>
+
+                <h3>Категории лекарства</h3>
+                <div class="brd">
+                    <#list categories as category>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"
+                                   value="${category.id}">
+                            <label class="form-check-label" for="inlineCheckbox">${category.name}</label>
+                        </div>
+                    </#list>
+                </div>
+
+                <h3>Класс аналога</h3>
+                <div class="brd">
+                    <#list analogues as analogue>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="analogueId" id="inlineRadio"
+                                   value="${analogue.id}">
+                            <label class="form-check-label" for="inlineRadio">${analogue.title}</label>
+                        </div>
+                    </#list>
+                </div>
+                <br>
+                <br>
+            </div>
+
+            <input class="btn" type="submit" value="Сохранить">
+            <br>
+            <br>
+
+        </form>
+    </div>
 
 
+<#--    <#include "components/footer.ftl" >-->
+</main>
 </body>
 </html>

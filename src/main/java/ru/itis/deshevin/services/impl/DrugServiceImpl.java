@@ -57,10 +57,6 @@ public class DrugServiceImpl implements DrugService {
                             .build()
             );
         }
-        FileInfoEntity newFile = null;
-        if (addDrugDto.getFile() != null) {
-            newFile = filesService.saveFileToStorage(addDrugDto.getFile()).get();
-        }
         if (!addDrugDto.getCategoryIdList().isEmpty()) {
             drugEntity.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
         }
@@ -74,7 +70,6 @@ public class DrugServiceImpl implements DrugService {
         drugEntity.setEffect(addDrugDto.getEffect());
         drugEntity.setInstruction(addDrugDto.getInstruction());
         drugEntity.setStorageConditions(addDrugDto.getStorageConditions());
-        drugEntity.setPhoto(newFile);
         drugRepository.save(drugEntity);
         log.info("Finish updating drug");
     }

@@ -28,8 +28,8 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <h1>Вход</h1>
     <div class="home-content">
+        <h1>Вход</h1>
         <form method="post" action="/sign-in" class="form-wrapper" enctype="multipart/form-data">
             <div>
                 <h3>Логин или электронная почта</h3>

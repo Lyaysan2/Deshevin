@@ -89,6 +89,6 @@
 
     </table>
 
-    <#include "components/footer.ftl" >
+<#--    <#include "components/footer.ftl" >-->
 </body>
 </html>

@@ -47,6 +47,7 @@ a:active, a:hover{
 
 .navbar-text {
     color: white;
+    font-size: 18px;
 }
 
 .btn {
@@ -60,7 +61,18 @@ a:active, a:hover{
     font-family: Inter, sans-serif;
     font-weight: bold;
     font-size: 16px;
-    height: 45px;
+    height: 43px;
+}
+
+.btn-delete {
+    color: #FC462D;
+    font-size: 16px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }
 
 .container{
@@ -77,6 +89,11 @@ a:active, a:hover{
     display: grid;
     place-items: center;
     height: 70vh;
+}
+
+.content {
+    display: grid;
+    place-items: center;
 }
 
 .home-text-main {
@@ -156,4 +173,78 @@ a:active, a:hover{
 
 .profile-text {
     color: black;
+}
+
+.form-add {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.item-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #1D0D8D;
+}
+
+.form-check-label {
+    color: #1D0D8D;
+}
+
+.input__wrapper {
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.input__file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.input__file-button-text {
+    line-height: 1;
+    margin-top: 1px;
+}
+
+.input__file-button {
+    width: 100%;
+    max-width: 290px;
+    height: 30px;
+    color: #FC462D;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.title-photo {
+    display: flex;
+    flex-direction: column;
+}
+
+.drug-name {
+    text-decoration: none;
+    padding: 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FC462D;
+}
+
+td {
+    align-items: center;
 }
