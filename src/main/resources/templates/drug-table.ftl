@@ -35,42 +35,54 @@
     <table class="table">
         <thead class="thead-light bg-info">
         <tr>
-<#--            <th scope="col">#</th>-->
-<#--            <th scope="col">Фото</th>-->
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Категория</th>
-            <th scope="col">Аналог класс</th>
-            <th scope="col">Удалить</th>
+            <th scope="col" class="table-title">Название</th>
+            <th scope="col" class="table-title">Описание</th>
+            <th scope="col" class="table-title">Категория</th>
+            <th scope="col" class="table-title">Аналог класс</th>
+            <th scope="col" class="table-title">Удалить</th>
         </tr>
         </thead>
 
         <#list drugs as drug>
             <tr id="my-tr-${drug.id}">
 <#--                <th scope="row">${drug?index + 1}</th>-->
-                <td style="width: 300px">
-                    <div class="title-photo">
-                        <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
-                        <#if (drug.drugImageFileDBID)??>
-                            <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
-                        <#else>
-                            <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                <td>
+                    <div class="table-item">
+                        <div class="title-photo">
+                            <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
+                            <br>
+                            <#if (drug.drugImageFileDBID)??>
+                                <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                            <#else>
+                                <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                            </#if>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-item">
+                        ${drug.description}
+                    </div>
+                </td>
+                <td>
+                    <div class="table-item">
+                        <#if (drug.category)??>
+                            <#list (drug.category) as cat>
+                                ${cat.name}<br>
+                            </#list>
                         </#if>
                     </div>
                 </td>
-                <td>${drug.description}</td>
                 <td>
-                    <#if (drug.category)??>
-                        <#list (drug.category) as cat>
-                            ${cat.name}
-                        </#list>
-                    </#if>
-                </td>
-                <td> <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></td>
+                    <div class="table-item">
+                        <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></td>
+                    </div>
                 <td>
-                    <button type="submit" onclick="delet('${drug.id}')" style="position:relative; left:10px; top:15px"
-                            class="btn btn-danger">X
-                    </button>
+                    <div class="table-item">
+                        <button type="submit" onclick="delet('${drug.id}')"
+                                class="btn-delete">Удалить
+                        </button>
+                    </div>
                 </td>
             </tr>
         </#list>

@@ -240,11 +240,46 @@ a:active, a:hover{
 .drug-name {
     text-decoration: none;
     padding: 0;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
     color: #FC462D;
 }
 
-td {
+.table-item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    color: #1D0D8D;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.table-title {
+    color: #1D0D8D;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+td {
+    vertical-align: baseline;
+    width: 2000px;
+    border: none !important;
+}
+
+th {
+    padding-bottom: 15px;
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+}
+
+tr {
+    border-top: 1px solid #1D0D8D;
+    border-bottom: 1px solid #1D0D8D;
+}
+
+tr:first-child {
+    border-top: none;
 }
