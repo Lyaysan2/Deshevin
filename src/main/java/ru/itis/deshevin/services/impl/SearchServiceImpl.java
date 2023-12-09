@@ -9,11 +9,10 @@ import ru.itis.deshevin.models.DrugEntity;
 import ru.itis.deshevin.repositories.DrugRepository;
 import ru.itis.deshevin.services.SearchService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,26 +24,26 @@ public class SearchServiceImpl implements SearchService {
     private final DrugMapper drugMapper;
 
     @Override
-    public List<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId) {
+    public Set<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId) {
         log.info("Search for drugs in same analogue class with {}", drugId);
         Optional<DrugEntity> optionalDrug = drugRepository.findById(drugId);
         if(optionalDrug.isEmpty()) {
             log.error("Drug not found! id = {}", drugId);
-            return new ArrayList<>();
+            return new HashSet<>();
         }
         DrugEntity drug = optionalDrug.get();
-        return drugMapper.toDrugListDto(drugRepository.findAllByAnalogueClass(drug.getAnalogueClass()));
+        return drugMapper.toDrudSetDto(drugRepository.findAllByAnalogueClass(drug.getAnalogueClass()));
     }
 
 //    @Override
-//    public List<DrugDto> getDrugsWithSameCategoryAs(UUID drugId) {
+//    public Set<DrugDto> getDrugsWithSameCategoryAs(UUID drugId) {
 //        log.info("Search for drugs in same category with {}", drugId);
 //        Optional<DrugsEntity> optionalDrug = drugRepository.findById(drugId);
 //        if(optionalDrug.isEmpty()) {
 //            log.error("Drug not found! id = {}", drugId);
-//            return new ArrayList<>();
+//            return new ArraySet<>();
 //        }
 //        DrugsEntity drug = optionalDrug.get();
-//        return drugMapper.toDrugListDto(drugRepository.findAllByCategory(drug.getCategory()));
+//        return drugMapper.toDrugSetDto(drugRepository.findAllByCategory(drug.getCategory()));
 //    }
 }

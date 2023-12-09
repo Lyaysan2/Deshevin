@@ -11,7 +11,7 @@ import ru.itis.deshevin.services.CategoryService;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,9 +23,9 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
 
-    public List<CategoryDto> getAllCategory() {
+    public Set<CategoryDto> getAllCategory() {
         log.info("Get all categories");
-        return categoryMapper.toCategoryDtoList(categoryRepository.findAll());
+        return categoryMapper.toCategoryDtoSet((Set<CategoryEntity>) categoryRepository.findAll());
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Set<CategoryEntity> getCategoriesById(List<String> categoriesId) {
-        return new HashSet<>(categoryRepository.findAllById(categoriesId.stream().map(UUID::fromString).collect(Collectors.toList())));
+    public Set<CategoryEntity> getCategoriesById(Set<String> categoriesId) {
+        return new HashSet<>(categoryRepository.findAllById(categoriesId.stream().map(UUID::fromString).collect(Collectors.toSet())));
     }
 }

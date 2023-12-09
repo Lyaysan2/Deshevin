@@ -19,6 +19,14 @@
             document.getElementById("my-tr-" + id).hidden = true
         }
     </script>
+    <style>
+        .avatar {
+            width: 200px;
+            height: 200px;
+            display: inline;
+            justify-content: center;
+        }
+    </style>
 
 
     <#include "components/links.ftl">
@@ -31,11 +39,11 @@
     <table class="table">
         <thead class="thead-light bg-info">
         <tr>
-            <th scope="col">#</th>
+<#--            <th scope="col">#</th>-->
             <th scope="col">Название</th>
             <th scope="col">Описание</th>
             <th scope="col">Категория</th>
-            <th scope="col">Аналог класс</th>
+<#--            <th scope="col">Аналог класс</th>-->
             <th scope="col">Удалить из избранного</th>
         </tr>
         </thead>
@@ -43,19 +51,40 @@
             <#list favourites as drug>
 
                 <tr id="my-tr-${drug.id}">
-                    <th scope="row">${drug?index + 1}</th>
-                    <td><a href="/drug/${drug.id}">${drug.title}</a></td>
-                    <td>${drug.description}...</td>
+<#--                    <th scope="row">${drug?index + 1}</th>-->
                     <td>
-                        <#if (drug.category)??>
-                            <#list (drug.category) as cat>
-                                ${cat.name}
-                            </#list>
-                        </#if>
+                        <div class="table-item">
+                            <div class="title-photo">
+                                <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
+                                <br>
+                                <#if (drug.drugImageFileDBID)??>
+                                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                                <#else>
+                                    <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                                </#if>
+                            </div>
+                        </div>
                     </td>
-                    <td><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></td>
                     <td>
-                        <button type="submit" onclick="delFromFav('${drug.id}')" style="position:relative; left:10px; top:15px" class="btn btn-danger">X</button>
+                        <div class="table-item">
+                            ${drug.description}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-item">
+                            <#if (drug.category)??>
+                                <#list (drug.category) as cat>
+                                    ${cat.name}<br>
+                                </#list>
+                            </#if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-item">
+                            <button type="submit" onclick="delFromFav('${drug.id}')"
+                                    class="btn-delete">Удалить из избранного
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </#list>
@@ -63,7 +92,7 @@
     </table>
 </main>
 
-<#include "components/footer.ftl" >
+<#--<#include "components/footer.ftl" >-->
 
 </body>
 </html>

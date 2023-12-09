@@ -11,7 +11,7 @@ import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.SearchService;
 import ru.itis.deshevin.services.UserService;
 
-import java.util.List;
+import java.util.Set;
 import java.util.Optional;
 import java.util.UUID;
 

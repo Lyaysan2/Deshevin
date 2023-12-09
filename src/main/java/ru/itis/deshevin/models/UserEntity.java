@@ -6,7 +6,8 @@ import ru.itis.deshevin.enums.Role;
 import ru.itis.deshevin.enums.Status;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
+import java.util.Set;
 
 @Data
 @Entity
@@ -45,7 +46,7 @@ public class UserEntity extends BaseEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "drug_id")
     )
-    private List<DrugEntity> favorites;
+    private Set<DrugEntity> favorites;
 
     /**
      * User info

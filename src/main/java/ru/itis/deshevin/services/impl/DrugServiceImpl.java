@@ -15,7 +15,8 @@ import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.FilesService;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.Set;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,7 @@ public class DrugServiceImpl implements DrugService {
             newFile = filesService.saveFileToStorage(addDrugDto.getFile()).get();
         }
         DrugEntity newDrug = drugMapper.toDrugEntity(addDrugDto);
-        newDrug.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
+        newDrug.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdSet()));
         newDrug.setPhoto(newFile);
         drugRepository.save(newDrug);
         log.info("Finish saving drug");
@@ -57,8 +58,8 @@ public class DrugServiceImpl implements DrugService {
                             .build()
             );
         }
-        if (!addDrugDto.getCategoryIdList().isEmpty()) {
-            drugEntity.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
+        if (!addDrugDto.getCategoryIdSet().isEmpty()) {
+            drugEntity.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdSet()));
         }
         drugEntity.setTitle(addDrugDto.getTitle());
         drugEntity.setDescription(addDrugDto.getDescription());
@@ -75,15 +76,15 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public List<DrugDto> getAllDrugs(String prefix) {
+    public Set<DrugDto> getAllDrugs(String prefix) {
         log.info("Drug search by prefix {}", prefix);
-        List<DrugDto> drugDtoList = drugMapper.toDrugListDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
+        Set<DrugDto> drugDtoSet = drugMapper.toDrudSetDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
                 .stream()
                 .peek(
                         drug -> drug.setDescription(drug.getDescription().substring(0, Integer.min(100, drug.getDescription().length())))
-                ).collect(Collectors.toList());
-        log.info(drugDtoList);
-        return drugDtoList;
+                ).collect(Collectors.toSet());
+        log.info(drugDtoSet);
+        return drugDtoSet;
     }
 
     @Override

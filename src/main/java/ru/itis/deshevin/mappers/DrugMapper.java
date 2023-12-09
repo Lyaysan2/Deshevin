@@ -8,7 +8,8 @@ import ru.itis.deshevin.dto.AddDrugDto;
 import ru.itis.deshevin.dto.DrugDto;
 import ru.itis.deshevin.models.DrugEntity;
 
-import java.util.List;
+import java.util.Set;
+import java.util.Set;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = CategoryMapper.class)
 public interface DrugMapper {
@@ -21,5 +22,5 @@ public interface DrugMapper {
     @Mapping(target = "drugImageFileDBID", source = "photo.fileDBID")
     DrugDto toDrugDto(DrugEntity drugEntity);
 
-    List<DrugDto> toDrugListDto(List<DrugEntity> drugEntityList);
+    Set<DrugDto> toDrudSetDto(Set<DrugEntity> drugEntitySet);
 }

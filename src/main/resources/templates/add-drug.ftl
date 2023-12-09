@@ -91,7 +91,7 @@
                 <div class="brd">
                     <#list categories as category>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"
+                            <input class="form-check-input" name="categoryIdSet" type="checkbox" id="inlineCheckbox"
                                    value="${category.id}">
                             <label class="form-check-label" for="inlineCheckbox">${category.name}</label>
                         </div>

@@ -14,7 +14,9 @@ import ru.itis.deshevin.models.UserEntity;
 import ru.itis.deshevin.repositories.UserRepository;
 import ru.itis.deshevin.services.SignUpService;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Log4j2
 @RequiredArgsConstructor
@@ -43,7 +45,7 @@ public class SignUpServiceImpl implements SignUpService {
                 .password(passwordEncoder.encode(signUpDto.getPassword()))
                 .role(Role.COMMON_USER)
                 .status(Status.NORMAL)
-                .favorites(new ArrayList<>())
+                .favorites(new HashSet<>())
                 .build();
 
         userRepository.save(newUser);

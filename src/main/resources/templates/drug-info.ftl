@@ -65,7 +65,7 @@
     <#return false>
 </#function>
 <main class="container">
-    <h2>${drug.title}</h2>
+    <h2 class="drug-name">${drug.title}</h2>
     <div class="row justify-content-md-center">
         <#if user.role == 'ADMIN'>
             <form method="post" action="" class="drug-form" enctype="multipart/form-data">
@@ -76,19 +76,11 @@
                     <#else>
                         <img src="/img/no-image.png" alt="avatar" class="avatar"/>
                     </#if>
-                    <p><strong>Название:</strong>
+                    <p>Название:
                         <input class="form-control mb-2" name="title" value="${drug.title}" type="text">
                     </p>
-                    <p><strong>Категория:</strong>
-                        <#--                        todo: список категорий с нужными checked -->
-                        <#--                        <#list categories as category>-->
-                        <#--                            <div class="form-check form-check-inline">-->
-                        <#--                                <input class="form-check-input" name="categoryIdList" type="checkbox" id="inlineCheckbox"-->
-                        <#--                                       value="${category.id}" ${isCategorySelected(category.name, drug) ? "checked": ''}>-->
-                        <#--                                <label class="form-check-label" for="inlineCheckbox">${category.name}</label>-->
-                        <#--                            </div>-->
-                        <#--                        </#list>-->
-                        <select multiple name="categoryIdList" class="custom-select mr-sm-2"
+                    <p>Категория:
+                        <select multiple name="categoryIdSet" class="custom-select mr-sm-2"
                                 id="inlineFormCustomSelect">
                             <option value="" multiple="multiple" selected> <#if drug.category??>
                                     <#list drug.category as category>
@@ -97,12 +89,11 @@
                                 <#else>нет</#if>
                             </option>
                             <#list categories as category>
-                                <option name="categoryIdList" value="${category.id}">${category.name}</option>
+                                <option name="categoryIdSet" value="${category.id}">${category.name}</option>
                             </#list>
                         </select>
                     </p>
-                    <#--                    todo: класс аналог с нужным выделенным-->
-                    <p><strong>Класс аналог:</strong>
+                    <p>Класс аналога:
                         <select name="analogueId" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                             <option name="analogueId" value=""
                                     selected> <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></option>
@@ -114,31 +105,31 @@
                 </div>
                 <div class="row">
                     <div class="col align-self-center">
-                        <p><strong>Описание:</strong></p>
+                        <p>Описание:</p>
                         <textarea class="form-control" id="drugDescription" rows="3"
                                   name="description">${drug.description}</textarea>
-                        <p><strong>Состав:</strong></p>
+                        <p>Состав:</p>
                         <textarea class="form-control" id="drugComposition" rows="3"
                                   name="composition">${drug.composition}</textarea>
-                        <p><strong>Побочные эффекты:</strong></p>
+                        <p>Побочные эффекты:</p>
                         <textarea class="form-control" id="drugSideEffects" rows="3"
                                   name="sideEffects">${drug.sideEffects}</textarea>
-                        <p><strong>Действие:</strong></p>
+                        <p>Действие:</p>
                         <textarea class="form-control" id="drugEffect" rows="3"
                                   name="effect">${drug.effect}</textarea>
-                        <p><strong>Применение:</strong></p>
+                        <p>Применение:</p>
                         <textarea class="form-control" id="drugInstruction" rows="3"
                                   name="instruction">${drug.instruction}</textarea>
-                        <p><strong>Противопоказания:</strong></p>
+                        <p>Противопоказания:</p>
                         <textarea class="form-control" id="drugContraindications" rows="3"
                                   name="contraindications">${drug.contraindications}</textarea>
-                        <p><strong>Форма выпуска:</strong></p>
+                        <p>Форма выпуска:</p>
                         <textarea class="form-control" id="drugReleaseForm" rows="3"
                                   name="releaseForm">${drug.releaseForm}</textarea>
-                        <p><strong>Производитель:</strong></p>
+                        <p>Производитель:</p>
                         <textarea class="form-control" id="drugManufacturer" rows="3"
                                   name="manufacturer">${drug.manufacturer}</textarea>
-                        <p><strong>Условия хранения:</strong></p>
+                        <p>Условия хранения:</p>
                         <textarea class="form-control" id="drugStorageConditions" rows="3"
                                   name="storageConditions">${drug.storageConditions}</textarea>
                     </div>
@@ -148,18 +139,20 @@
                 </div>
             </form>
         <#elseif user.role == 'COMMON_USER'>
-            <main class="container">
-                <#if inFavorites(user, drug)>
-                    <button type="submit" onclick="delet('${drug.id}')" class="btn">Удалить из избранных</button>
-                <#else>
-                    <button type="submit" onclick="addToFav('${drug.id}')" class="btn">Добавить в избранные</button>
-                </#if>
-                <div class="alert alert-info" role="alert">Информация</div>
-                <#if (drug.drugImageFileDBID)??>
-                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
-                <#else>
-                    <img src="/img/no-image.png" alt="avatar" class="avatar"/>
-                </#if>
+            <main>
+                <div class="drug-title"
+                    <#if (drug.drugImageFileDBID)??>
+                        <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                    <#else>
+                        <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                    </#if>
+                    <#if inFavorites(user, drug)>
+                        <button type="submit" onclick="delet('${drug.id}')" class="btn-delete">Удалить из избранных</button>
+                    <#else>
+                        <button type="submit" onclick="addToFav('${drug.id}')" class="btn-delete">Добавить в избранные</button>
+                    </#if>
+                </div>
+
                 <div class="mb-3">
                     <label for="title" class="drug-info">Название: ${drug.title}</label>
                 </div>
@@ -207,7 +200,7 @@
 
 </main>
 
-<#include "components/footer.ftl" >
+<#--<#include "components/footer.ftl" >-->
 
 </body>
 </html>
