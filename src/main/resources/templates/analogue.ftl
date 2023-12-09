@@ -27,11 +27,11 @@
 <div class="container">
     <h1>Классы аналогов</h1>
     <section class="py-5">
-        <form class="form-add" method="post" action="/analogue" enctype="multipart/form-data">
-            <div class="form-group mx-sm-3 mb-2">
+        <form method="post" action="/analogue" enctype="multipart/form-data">
+            <p>
                 <input class="input-form" name="title" id="inputAnalogue" type="text" placeholder="Введите класс аналогов">
-            </div>
-            <button type="submit" class="btn btn-info mb-2">Добавить</button>
+                <button type="submit" class="btn btn-info mb-2">Добавить</button>
+            </p>
         </form>
     </section>
     <br>

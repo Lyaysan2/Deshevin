@@ -28,11 +28,11 @@
 <div class="container">
     <h1>Категории</h1>
     <section class="py-5">
-        <form class="form-add" method="post" action="/category" enctype="multipart/form-data">
-            <div class="form-group mx-sm-3 mb-2">
+        <form method="post" action="/category" enctype="multipart/form-data">
+            <p>
                 <input class="input-form" name="name" id="inputCategory" type="text" placeholder="Введите категорию">
-            </div>
-            <button type="submit" class="btn">Добавить</button>
+                <button type="submit" class="btn">Добавить</button>
+            </p>
         </form>
     </section>
     <br>
