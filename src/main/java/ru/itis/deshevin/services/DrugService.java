@@ -3,6 +3,7 @@ package ru.itis.deshevin.services;
 import ru.itis.deshevin.dto.AddDrugDto;
 import ru.itis.deshevin.dto.DrugDto;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -11,7 +12,7 @@ public interface DrugService {
 
     void updateDrug(AddDrugDto addDrugDto, UUID id);
 
-    Set<DrugDto> getAllDrugs(String prefix);
+    List<DrugDto> getAllDrugs(String prefix);
 
     DrugDto getDrugById(UUID id);
 

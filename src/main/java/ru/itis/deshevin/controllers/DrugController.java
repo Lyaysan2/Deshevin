@@ -33,8 +33,8 @@ public class DrugController {
     @GetMapping
     public String getAddDrugPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userEntityDetails.getUserEntity());
-        model.addAttribute("categories", new ArrayList<>(categoryService.getAllCategory()));
-        model.addAttribute("analogues", new ArrayList<>(analogueClassService.getAllAnalogueClass()));
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
         return "add-drug";
     }
 
@@ -53,10 +53,11 @@ public class DrugController {
     }
 
     @GetMapping("/{drug-id}")
-    public String getDrugInfoPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, @PathVariable("drug-id") UUID id, Model model) {
+    public String getDrugInfoPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails,
+                                  @PathVariable("drug-id") UUID id, Model model) {
         model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
-        model.addAttribute("categories", new ArrayList<>(categoryService.getAllCategory()));
-        model.addAttribute("analogues", new ArrayList<>(analogueClassService.getAllAnalogueClass()));
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
         model.addAttribute("drug", drugService.getDrugById(id));
         return "drug-info";
     }

@@ -9,10 +9,7 @@ import ru.itis.deshevin.models.DrugEntity;
 import ru.itis.deshevin.repositories.DrugRepository;
 import ru.itis.deshevin.services.SearchService;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -24,15 +21,15 @@ public class SearchServiceImpl implements SearchService {
     private final DrugMapper drugMapper;
 
     @Override
-    public Set<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId) {
+    public List<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId) {
         log.info("Search for drugs in same analogue class with {}", drugId);
         Optional<DrugEntity> optionalDrug = drugRepository.findById(drugId);
         if(optionalDrug.isEmpty()) {
             log.error("Drug not found! id = {}", drugId);
-            return new HashSet<>();
+            return new ArrayList<>();
         }
         DrugEntity drug = optionalDrug.get();
-        return drugMapper.toDrudSetDto(drugRepository.findAllByAnalogueClass(drug.getAnalogueClass()));
+        return drugMapper.toDrudListDto(drugRepository.findAllByAnalogueClass(drug.getAnalogueClass()));
     }
 
 //    @Override

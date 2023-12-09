@@ -5,12 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import ru.itis.deshevin.dto.AnalogueClassDto;
 import ru.itis.deshevin.mappers.AnalogueClassMapper;
-import ru.itis.deshevin.models.AnalogueClassEntity;
 import ru.itis.deshevin.repositories.AnalogueClassRepository;
 import ru.itis.deshevin.services.AnalogueClassService;
 
 import javax.transaction.Transactional;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Log4j2
@@ -22,9 +21,9 @@ public class AnalogueClassServiceImpl implements AnalogueClassService {
     private final AnalogueClassRepository analogueClassRepository;
 
     @Override
-    public Set<AnalogueClassDto> getAllAnalogueClass() {
+    public List<AnalogueClassDto> getAllAnalogueClass() {
         log.info("Get all Analogue Classes");
-        return analogueClassMapper.toAnalogueClassDtoSet((Set<AnalogueClassEntity>) analogueClassRepository.findAll());
+        return analogueClassMapper.toAnalogueClassDtoList(analogueClassRepository.findAll());
     }
 
     @Override

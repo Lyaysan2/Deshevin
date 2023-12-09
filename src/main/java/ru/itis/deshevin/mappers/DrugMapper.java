@@ -8,6 +8,7 @@ import ru.itis.deshevin.dto.AddDrugDto;
 import ru.itis.deshevin.dto.DrugDto;
 import ru.itis.deshevin.models.DrugEntity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.Set;
 
@@ -22,5 +23,5 @@ public interface DrugMapper {
     @Mapping(target = "drugImageFileDBID", source = "photo.fileDBID")
     DrugDto toDrugDto(DrugEntity drugEntity);
 
-    Set<DrugDto> toDrudSetDto(Set<DrugEntity> drugEntitySet);
+    List<DrugDto> toDrudListDto(List<DrugEntity> drugEntityList);
 }

@@ -15,8 +15,8 @@ import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.FilesService;
 
 import javax.transaction.Transactional;
-import java.util.Set;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -76,15 +76,15 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public Set<DrugDto> getAllDrugs(String prefix) {
+    public List<DrugDto> getAllDrugs(String prefix) {
         log.info("Drug search by prefix {}", prefix);
-        Set<DrugDto> drugDtoSet = drugMapper.toDrudSetDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
+        List<DrugDto> drugDtoList = drugMapper.toDrudListDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
                 .stream()
                 .peek(
                         drug -> drug.setDescription(drug.getDescription().substring(0, Integer.min(100, drug.getDescription().length())))
-                ).collect(Collectors.toSet());
-        log.info(drugDtoSet);
-        return drugDtoSet;
+                ).collect(Collectors.toList());
+        log.info(drugDtoList);
+        return drugDtoList;
     }
 
     @Override

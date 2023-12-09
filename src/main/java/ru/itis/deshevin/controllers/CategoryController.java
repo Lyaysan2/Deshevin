@@ -22,7 +22,7 @@ public class CategoryController {
     @GetMapping
     public String getCategoryPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userEntityDetails.getUserEntity());
-        model.addAttribute("categories", new ArrayList<>(categoryService.getAllCategory()));
+        model.addAttribute("categories", categoryService.getAllCategory());
         return "category";
     }
 

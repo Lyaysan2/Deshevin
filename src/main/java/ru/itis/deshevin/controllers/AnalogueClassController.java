@@ -26,7 +26,7 @@ public class AnalogueClassController {
     @GetMapping
     public String getAnalogueClassPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
-        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass().stream().collect(Collectors.toList()));
+        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
         return "analogue";
     }
 
