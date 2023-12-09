@@ -11,7 +11,9 @@ import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.AnalogueClassService;
 import ru.itis.deshevin.services.UserService;
 
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/analogue")
@@ -24,7 +26,7 @@ public class AnalogueClassController {
     @GetMapping
     public String getAnalogueClassPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
-        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
+        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass().stream().collect(Collectors.toList()));
         return "analogue";
     }
 

@@ -7,14 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.itis.deshevin.dto.AddDrugDto;
+import ru.itis.deshevin.dto.CategoryDto;
 import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.AnalogueClassService;
 import ru.itis.deshevin.services.CategoryService;
 import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.UserService;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/drug")
@@ -30,8 +33,8 @@ public class DrugController {
     @GetMapping
     public String getAddDrugPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userEntityDetails.getUserEntity());
-        model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
+        model.addAttribute("categories", new ArrayList<>(categoryService.getAllCategory()));
+        model.addAttribute("analogues", new ArrayList<>(analogueClassService.getAllAnalogueClass()));
         return "add-drug";
     }
 
@@ -52,8 +55,8 @@ public class DrugController {
     @GetMapping("/{drug-id}")
     public String getDrugInfoPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, @PathVariable("drug-id") UUID id, Model model) {
         model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
-        model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("analogues", analogueClassService.getAllAnalogueClass());
+        model.addAttribute("categories", new ArrayList<>(categoryService.getAllCategory()));
+        model.addAttribute("analogues", new ArrayList<>(analogueClassService.getAllAnalogueClass()));
         model.addAttribute("drug", drugService.getDrugById(id));
         return "drug-info";
     }

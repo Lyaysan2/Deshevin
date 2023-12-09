@@ -9,6 +9,7 @@ import ru.itis.deshevin.dto.CategoryDto;
 import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.CategoryService;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Controller
@@ -21,7 +22,7 @@ public class CategoryController {
     @GetMapping
     public String getCategoryPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model) {
         model.addAttribute("user", userEntityDetails.getUserEntity());
-        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("categories", new ArrayList<>(categoryService.getAllCategory()));
         return "category";
     }
 
