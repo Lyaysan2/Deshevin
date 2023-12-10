@@ -50,15 +50,16 @@
     </#function>
 
     <div class="container">
-        <h1>Поиск препаратов</h1>
+        <div class="content">
+            <h1>Поиск препаратов</h1>
 
-        <form action="/search" method="get">
-            <p>
-    <#--            <label for="name">Напишите название:</label>-->
-                <input type="text" class="input-form" name="prefixParam" id="prefixParam" placeholder="Введите название лекарства">
-                <input type="submit" class="btn" value="Поиск">
-            </p>
-        </form>
+            <form action="/search" method="get">
+                <p>
+                    <input type="text" class="input-form" name="prefixParam" id="prefixParam" placeholder="Введите название лекарства">
+                    <input type="submit" class="btn" value="Поиск">
+                </p>
+            </form>
+        </div>
 
         <table class="table" id="content-table">
             <thead class="thead-light bg-info">

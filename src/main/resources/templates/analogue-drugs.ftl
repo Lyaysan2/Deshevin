@@ -37,16 +37,16 @@
 </head>
 <body class="text-center">
     <#include "components/header.ftl">
-    <#function inFavorites(user, drug)>
+    <#function inFavorites(user, analogue)>
         <#list user.favorites as userFavDrugs>
-            <#if userFavDrugs.title == drug.title>
+            <#if userFavDrugs.title == analogue.title>
                 <#return true>
             </#if>
         </#list>
         <#return false>
     </#function>
     <div class="container">
-        <h1>Просмотр аналогов препаратов для: </h1>
+        <h1>Просмотр аналогов препаратов для: ${drug.title}</h1>
 
         <table class="table">
             <thead class="thead-light bg-info">
@@ -58,15 +58,15 @@
 <#--                <th scope="col" class="table-title">Действие</th>-->
             </tr>
             </thead>
-            <#list drugs as drug>
+            <#list analogues as analogue>
                 <tr>
                     <td>
                         <div class="table-item">
                             <div class="title-photo">
-                                <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
+                                <a href="/drug/${analogue.id}" class="drug-name">${analogue.title}</a>
                                 <br>
-                                <#if (drug.drugImageFileDBID)??>
-                                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                                <#if (analogue.drugImageFileDBID)??>
+                                    <img src="/files/${analogue.drugImageFileDBID}" alt="avatar" class="avatar">
                                 <#else>
                                     <img src="/img/no-image.png" alt="avatar" class="avatar"/>
                                 </#if>
@@ -75,13 +75,13 @@
                     </td>
                     <td>
                         <div class="table-item">
-                            ${drug.description}...
+                            ${analogue.description}...
                         </div>
                     </td>
                     <td>
                         <div class="table-item">
-                            <#if (drug.category)??>
-                                <#list (drug.category) as cat>
+                            <#if (analogue.category)??>
+                                <#list (analogue.category) as cat>
                                     ${cat.name}<br>
                                 </#list>
                             </#if>
@@ -89,7 +89,7 @@
                     </td>
                     <td>
                         <div class="table-item">
-                            <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
+                            <#if analogue.analogueClass??>${analogue.analogueClass}<#else>нет</#if>
                         </div>
                     </td>
                 </tr>

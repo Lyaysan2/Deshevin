@@ -25,7 +25,7 @@
 </head>
 <body class="text-center">
 <#include "components/header.ftl">
-<div class="container">
+<div class="container" style="place-items: center;">
     <h1>Категории</h1>
     <section class="py-5">
         <form method="post" action="/category" enctype="multipart/form-data">

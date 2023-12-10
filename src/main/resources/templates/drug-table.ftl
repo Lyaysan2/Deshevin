@@ -30,7 +30,7 @@
 <body>
 <#include "components/header.ftl">
 <main class="container">
-    <h1 class="text-center">База лекарств</h1>
+    <h1 class="text-center" style="text-align: center;">База лекарств</h1>
 
     <table class="table">
         <thead class="thead-light bg-info">

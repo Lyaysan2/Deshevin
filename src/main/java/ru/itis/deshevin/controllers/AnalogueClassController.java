@@ -9,6 +9,7 @@ import ru.itis.deshevin.dto.AnalogueClassDto;
 import ru.itis.deshevin.dto.CategoryDto;
 import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.AnalogueClassService;
+import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.UserService;
 
 import java.util.ArrayList;

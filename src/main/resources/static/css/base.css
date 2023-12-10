@@ -20,6 +20,10 @@ a:active, a:hover{
     font-weight: bold;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .navbar {
     background-color: #1D0D8D;
     height: 64px;
