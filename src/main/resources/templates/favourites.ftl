@@ -40,11 +40,11 @@
         <thead class="thead-light bg-info">
         <tr>
 <#--            <th scope="col">#</th>-->
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Категория</th>
+            <th scope="col" class="table-title">Название</th>
+            <th scope="col" class="table-title">Описание</th>
+            <th scope="col" class="table-title">Категория</th>
 <#--            <th scope="col">Аналог класс</th>-->
-            <th scope="col">Удалить из избранного</th>
+            <th scope="col" class="table-title">Удалить из избранного</th>
         </tr>
         </thead>
         <#if favourites??>

@@ -46,48 +46,57 @@
         <#return false>
     </#function>
     <div class="container">
-        <h1>Просмотр аналогов препаратов для:</h1>
-    </div>
+        <h1>Просмотр аналогов препаратов для: </h1>
 
-    <table class="table">
-        <thead class="thead-light bg-info">
-        <tr>
-            <th scope="col">Фото</th>
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Категория</th>
-            <th scope="col">Аналог класс</th>
-            <th scope="col">Действие</th>
-        </tr>
-        </thead>
-        <#list drugs as drug>
+        <table class="table">
+            <thead class="thead-light bg-info">
             <tr>
-                <#if (drug.drugImageFileDBID)??>
-                    <td scope="row"><img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar"></td>
-                <#else>
-                    <td scope="row"><img src="/img/no-image.png" alt="avatar" class="avatar"/></td>
-                </#if>
-                <td><a href="/drug/${drug.id}">${drug.title}</a></td>
-                <td>${drug.description}...</td>
-                <td><#if (drug.category)??>
-                        <#list (drug.category) as cat>
-                            ${cat.name}
-                        </#list>
-                    </#if></td>
-                <td><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></td>
-                <td>
-                    <#if user??>
-                        <#if inFavorites(user, drug)>
-                            <button type="submit" onclick="delet('${drug.id}')" class="btn">Удалить из избранных</button>
-                        <#else>
-                            <button type="submit" onclick="addToFav('${drug.id}')" class="btn">Добавить в избранные</button>
-                        </#if>
-                    </#if>
-                </td>
+                <th scope="col" class="table-title">Название</th>
+                <th scope="col" class="table-title">Описание</th>
+                <th scope="col" class="table-title">Категория</th>
+                <th scope="col" class="table-title">Класс аналогов</th>
+<#--                <th scope="col" class="table-title">Действие</th>-->
             </tr>
-        </#list>
+            </thead>
+            <#list drugs as drug>
+                <tr>
+                    <td>
+                        <div class="table-item">
+                            <div class="title-photo">
+                                <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
+                                <br>
+                                <#if (drug.drugImageFileDBID)??>
+                                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                                <#else>
+                                    <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                                </#if>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-item">
+                            ${drug.description}...
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-item">
+                            <#if (drug.category)??>
+                                <#list (drug.category) as cat>
+                                    ${cat.name}<br>
+                                </#list>
+                            </#if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="table-item">
+                            <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
+                        </div>
+                    </td>
+                </tr>
+            </#list>
 
-    </table>
+        </table>
+    </div>
 
 <#--    <#include "components/footer.ftl" >-->
 </body>

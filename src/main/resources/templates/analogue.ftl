@@ -37,7 +37,7 @@
     <br>
     <#list analogues as analogue>
         <div class="item-row">
-            <div id=${analogue.id}>${analogue.title}</div>
+            <div class="form-check-label" id=${analogue.id}>${analogue.title}</div>
             <button type="submit" onclick="delet('${analogue.id}')" class="btn-delete">Удалить</button>
         </div>
     </#list>

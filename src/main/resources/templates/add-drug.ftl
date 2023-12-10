@@ -98,7 +98,7 @@
                     </#list>
                 </div>
 
-                <h3>Класс аналога</h3>
+                <h3>Класс аналогов</h3>
                 <div class="brd">
                     <#list analogues as analogue>
                         <div class="form-check form-check-inline">

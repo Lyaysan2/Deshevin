@@ -46,8 +46,8 @@
     </script>
     <style>
         .avatar {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             display: inline;
             justify-content: center;
         }
@@ -65,22 +65,30 @@
     <#return false>
 </#function>
 <main class="container">
-    <h2 class="drug-name">${drug.title}</h2>
+    <div class="drug-title">
+        <#if user.role == 'COMMON_USER'>
+            <h2 class="drug-name">${drug.title}</h2>
+            <#if inFavorites(user, drug)>
+                <button type="submit" onclick="delet('${drug.id}')" class="btn-delete">Удалить из избранных</button>
+            <#else>
+                <button type="submit" onclick="addToFav('${drug.id}')" class="btn-delete">Добавить в избранные</button>
+            </#if>
+        </#if>
+    </div>
     <div class="row justify-content-md-center">
         <#if user.role == 'ADMIN'>
-            <form method="post" action="" class="drug-form" enctype="multipart/form-data">
+            <form method="post" action="" class="content" enctype="multipart/form-data">
+                <#if (drug.drugImageFileDBID)??>
+                    <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                <#else>
+                    <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                </#if>
                 <div class="col">
-                    <div class="alert alert-info" role="alert">Информация</div>
-                    <#if (drug.drugImageFileDBID)??>
-                        <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
-                    <#else>
-                        <img src="/img/no-image.png" alt="avatar" class="avatar"/>
-                    </#if>
-                    <p>Название:
-                        <input class="form-control mb-2" name="title" value="${drug.title}" type="text">
+                    <p><h3>Название лекарства</h3>
+                        <input class="input-form" name="title" value="${drug.title}" type="text">
                     </p>
-                    <p>Категория:
-                        <select multiple name="categoryIdSet" class="custom-select mr-sm-2"
+                    <p><h3>Категории лекарства</h3>
+                        <select multiple name="categoryIdSet" class="input-form"
                                 id="inlineFormCustomSelect">
                             <option value="" multiple="multiple" selected> <#if drug.category??>
                                     <#list drug.category as category>
@@ -93,8 +101,8 @@
                             </#list>
                         </select>
                     </p>
-                    <p>Класс аналога:
-                        <select name="analogueId" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <p><h3>Класс аналога</h3>
+                        <select name="analogueId" class="input-form" id="inlineFormCustomSelect">
                             <option name="analogueId" value=""
                                     selected> <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></option>
                             <#list analogues as analogue>
@@ -105,94 +113,93 @@
                 </div>
                 <div class="row">
                     <div class="col align-self-center">
-                        <p>Описание:</p>
-                        <textarea class="form-control" id="drugDescription" rows="3"
+                        <p><h3>Описание</h3></p>
+                        <textarea class="input-form" id="drugDescription" rows="3"
                                   name="description">${drug.description}</textarea>
-                        <p>Состав:</p>
-                        <textarea class="form-control" id="drugComposition" rows="3"
+                        <p><h3>Состав</h3></p>
+                        <textarea class="input-form" id="drugComposition" rows="3"
                                   name="composition">${drug.composition}</textarea>
-                        <p>Побочные эффекты:</p>
-                        <textarea class="form-control" id="drugSideEffects" rows="3"
+                        <p><h3>Побочные эффекты</h3></p>
+                        <textarea class="input-form" id="drugSideEffects" rows="3"
                                   name="sideEffects">${drug.sideEffects}</textarea>
-                        <p>Действие:</p>
-                        <textarea class="form-control" id="drugEffect" rows="3"
+                        <p><h3>Действие</h3></p>
+                        <textarea class="input-form" id="drugEffect" rows="3"
                                   name="effect">${drug.effect}</textarea>
-                        <p>Применение:</p>
-                        <textarea class="form-control" id="drugInstruction" rows="3"
+                        <p><h3>Применение</h3></p>
+                        <textarea class="input-form" id="drugInstruction" rows="3"
                                   name="instruction">${drug.instruction}</textarea>
-                        <p>Противопоказания:</p>
-                        <textarea class="form-control" id="drugContraindications" rows="3"
+                        <p><h3>Противопоказания</h3></p>
+                        <textarea class="input-form" id="drugContraindications" rows="3"
                                   name="contraindications">${drug.contraindications}</textarea>
-                        <p>Форма выпуска:</p>
-                        <textarea class="form-control" id="drugReleaseForm" rows="3"
+                        <p><h3>Форма выпуска</h3></p>
+                        <textarea class="input-form" id="drugReleaseForm" rows="3"
                                   name="releaseForm">${drug.releaseForm}</textarea>
-                        <p>Производитель:</p>
-                        <textarea class="form-control" id="drugManufacturer" rows="3"
+                        <p><h3>Производитель</h3></p>
+                        <textarea class="input-form" id="drugManufacturer" rows="3"
                                   name="manufacturer">${drug.manufacturer}</textarea>
-                        <p>Условия хранения:</p>
-                        <textarea class="form-control" id="drugStorageConditions" rows="3"
+                        <p><h3>Условия хранения</h3></p>
+                        <textarea class="input-form" id="drugStorageConditions" rows="3"
                                   name="storageConditions">${drug.storageConditions}</textarea>
                     </div>
                 </div>
                 <div class="d-flex justify-content-around">
+                    <br>
                     <button type="submit" class="btn btn-info mb-2">Изменить</button>
+                    <br>
+                    <br>
                 </div>
             </form>
         <#elseif user.role == 'COMMON_USER'>
             <main>
-                <div class="drug-title"
+                <div class="photo-desc">
                     <#if (drug.drugImageFileDBID)??>
                         <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
                     <#else>
                         <img src="/img/no-image.png" alt="avatar" class="avatar"/>
                     </#if>
-                    <#if inFavorites(user, drug)>
-                        <button type="submit" onclick="delet('${drug.id}')" class="btn-delete">Удалить из избранных</button>
-                    <#else>
-                        <button type="submit" onclick="addToFav('${drug.id}')" class="btn-delete">Добавить в избранные</button>
-                    </#if>
+                    <h2 class="drug-desc">Описание: <p style="font-weight: normal">${drug.description}</p></h2>
                 </div>
+                <br>
+                <form action="/search/analogue/${drug.id}" class="inst-title">
+                    <button type="submit" class="btn">Просмотреть аналоги</button><br>
+                    <h2>Инструкция:</h2>
+                </form>
 
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Название: ${drug.title}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Описание: ${drug.description}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Состав: ${drug.composition}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Побочные эффекты: ${drug.sideEffects}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Действие: ${drug.effect}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Применение: ${drug.instruction}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Противопоказания: ${drug.contraindications}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Форма выпуска: ${drug.releaseForm}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Производитель: ${drug.manufacturer}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="title" class="drug-info">Условия хранения: ${drug.storageConditions}</label>
-                </div>
-                <div class="mb-3">
-                    <label for="category" class="drug-info">Категория: <#if (drug.category)??>
+                <div class="drug-info">
+                    <p class="info-name">
+                        <strong>Состав: </strong>${drug.composition}
+                    </p>
+                    <p class="info-name">
+                        <strong>Побочные эффекты: </strong>${drug.sideEffects}
+                    </p>
+                    <p class="info-name">
+                        <strong>Действие: </strong>${drug.effect}
+                    </p>
+                    <p class="info-name">
+                        <strong>Применение: </strong>${drug.instruction}
+                    </p>
+                    <p class="info-name">
+                        <strong>Противопоказания: </strong>${drug.contraindications}
+                    </p>
+                    <p class="info-name">
+                        <strong>Форма выпуска: </strong>${drug.releaseForm}
+                    </p>
+                    <p class="info-name">
+                        <strong>Производитель: </strong>${drug.manufacturer}
+                    </p>
+                    <p class="info-name">
+                        <strong>Условия хранения: </strong>${drug.storageConditions}
+                    </p>
+                    <p class="info-name">
+                        <strong>Категория: </strong><#if (drug.category)??>
                             <#list (drug.category) as cat>
                                 ${cat.name}
                             </#list>
-                        </#if></label>
-                </div>
-                <div class="mb-3">
-                    <label for="analogue-class" class="drug-info">Класс
-                        аналог: <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></label>
+                        </#if>
+                    </p>
+                    <p class="info-name">
+                        <strong>Класс аналогa: </strong><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
+                    </p>
                 </div>
             </main>
         </#if>
