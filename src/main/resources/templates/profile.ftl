@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель добавления лекарств">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="М. Ильдар">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Профиль</title>
 
@@ -36,12 +36,12 @@
                 <p>Электронная почта:&nbsp;</p>
                 <p class="profile-text">${user.email}</p>
             </div>
-
         </div>
 
         <div>
             <button onclick="location.href='/favourites';" class="btn" href="/search">Избранное</button>
         </div>
+
         <br>
         <br>
     </div>

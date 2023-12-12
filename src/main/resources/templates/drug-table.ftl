@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель лекарств">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="Г. Лейсан">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Панель лекарств</title>
 
@@ -27,25 +27,25 @@
         }
     </style>
 </head>
-<body>
+<body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <h1 class="text-center" style="text-align: center;">База лекарств</h1>
+    <h1 class="text-center">База лекарств</h1>
 
-    <table class="table">
+    <table class="table table-align">
         <thead class="thead-light bg-info">
         <tr>
             <th scope="col" class="table-title">Название</th>
             <th scope="col" class="table-title">Описание</th>
             <th scope="col" class="table-title">Категория</th>
-            <th scope="col" class="table-title">Аналог класс</th>
-            <th scope="col" class="table-title">Удалить</th>
+            <th scope="col" class="table-title">Класс аналогов</th>
+            <th scope="col" class="table-title">Действие</th>
         </tr>
         </thead>
 
         <#list drugs as drug>
             <tr id="my-tr-${drug.id}">
-<#--                <th scope="row">${drug?index + 1}</th>-->
+                <#--                <th scope="row">${drug?index + 1}</th>-->
                 <td>
                     <div class="table-item">
                         <div class="title-photo">
@@ -76,7 +76,7 @@
                 <td>
                     <div class="table-item">
                         <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></td>
-                    </div>
+                </div>
                 <td>
                     <div class="table-item">
                         <button type="submit" onclick="delet('${drug.id}')"

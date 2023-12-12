@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Страница информации о лекарстве">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="Г. Лейсан">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Информация о лекарстве</title>
 
@@ -23,25 +23,28 @@
         }
     </script>
     <script>
-        function delet(id) {
+        function delet(id, button) {
             jQuery.ajax({
                 url: '/favourites/delete-from-favourites/' + id,
-                type: 'delete',
-                success: function(){
-                    window.location.reload();
-                }
+                type: 'delete'
             });
+            button.innerText = 'Добавить в избранные';
+            button.onclick = function () {
+                addToFav(id, button);
+            };
         }
     </script>
+
     <script>
-        function addToFav(id) {
+        function addToFav(id, button) {
             jQuery.ajax({
                 url: '/favourites/add-to-favourites/' + id,
-                type: 'post',
-                success: function(){
-                    window.location.reload();
-                }
+                type: 'post'
             });
+            button.innerText = 'Удалить из избранных';
+            button.onclick = function () {
+                delet(id, button);
+            };
         }
     </script>
     <style>
@@ -69,9 +72,11 @@
         <#if user.role == 'COMMON_USER'>
             <h2 class="drug-name">${drug.title}</h2>
             <#if inFavorites(user, drug)>
-                <button type="submit" onclick="delet('${drug.id}')" class="btn-delete">Удалить из избранных</button>
+                <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из избранных
+                </button>
             <#else>
-                <button type="submit" onclick="addToFav('${drug.id}')" class="btn-delete">Добавить в избранные</button>
+                <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить в избранные
+                </button>
             </#if>
         </#if>
     </div>
@@ -84,60 +89,72 @@
                     <img src="/img/no-image.png" alt="avatar" class="avatar"/>
                 </#if>
                 <div class="col">
-                    <p><h3>Название лекарства</h3>
-                        <input class="input-form" name="title" value="${drug.title}" type="text">
+                    <p>
+                    <h3>Название лекарства</h3>
+                    <input class="input-form" name="title" value="${drug.title}" type="text">
                     </p>
-                    <p><h3>Категории лекарства</h3>
-                        <select multiple name="categoryIdSet" class="input-form"
-                                id="inlineFormCustomSelect">
-                            <option value="" multiple="multiple" selected> <#if drug.category??>
-                                    <#list drug.category as category>
-                                        <${category.name}
-                                    </#list>
-                                <#else>нет</#if>
-                            </option>
-                            <#list categories as category>
-                                <option name="categoryIdSet" value="${category.id}">${category.name}</option>
-                            </#list>
-                        </select>
+                    <p>
+                    <h3>Категории лекарства</h3>
+                    <select multiple name="categoryIdSet" class="input-form"
+                            id="inlineFormCustomSelect">
+                        <option value="" multiple="multiple" selected> <#if drug.category??>
+                                <#list drug.category as category>
+                                    <${category.name}
+                                </#list>
+                            <#else>нет</#if>
+                        </option>
+                        <#list categories as category>
+                            <option name="categoryIdSet" value="${category.id}">${category.name}</option>
+                        </#list>
+                    </select>
                     </p>
-                    <p><h3>Класс аналога</h3>
-                        <select name="analogueId" class="input-form" id="inlineFormCustomSelect">
-                            <option name="analogueId" value=""
-                                    selected> <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></option>
-                            <#list analogues as analogue>
-                                <option value="${analogue.id}">${analogue.title}</option>
-                            </#list>
-                        </select>
+                    <p>
+                    <h3>Класс аналога</h3>
+                    <select name="analogueId" class="input-form" id="inlineFormCustomSelect">
+                        <option name="analogueId" value=""
+                                selected> <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></option>
+                        <#list analogues as analogue>
+                            <option value="${analogue.id}">${analogue.title}</option>
+                        </#list>
+                    </select>
                     </p>
                 </div>
                 <div class="row">
                     <div class="col align-self-center">
-                        <p><h3>Описание</h3></p>
+                        <p>
+                        <h3>Описание</h3></p>
                         <textarea class="input-form" id="drugDescription" rows="3"
                                   name="description">${drug.description}</textarea>
-                        <p><h3>Состав</h3></p>
+                        <p>
+                        <h3>Состав</h3></p>
                         <textarea class="input-form" id="drugComposition" rows="3"
                                   name="composition">${drug.composition}</textarea>
-                        <p><h3>Побочные эффекты</h3></p>
+                        <p>
+                        <h3>Побочные эффекты</h3></p>
                         <textarea class="input-form" id="drugSideEffects" rows="3"
                                   name="sideEffects">${drug.sideEffects}</textarea>
-                        <p><h3>Действие</h3></p>
+                        <p>
+                        <h3>Действие</h3></p>
                         <textarea class="input-form" id="drugEffect" rows="3"
                                   name="effect">${drug.effect}</textarea>
-                        <p><h3>Применение</h3></p>
+                        <p>
+                        <h3>Применение</h3></p>
                         <textarea class="input-form" id="drugInstruction" rows="3"
                                   name="instruction">${drug.instruction}</textarea>
-                        <p><h3>Противопоказания</h3></p>
+                        <p>
+                        <h3>Противопоказания</h3></p>
                         <textarea class="input-form" id="drugContraindications" rows="3"
                                   name="contraindications">${drug.contraindications}</textarea>
-                        <p><h3>Форма выпуска</h3></p>
+                        <p>
+                        <h3>Форма выпуска</h3></p>
                         <textarea class="input-form" id="drugReleaseForm" rows="3"
                                   name="releaseForm">${drug.releaseForm}</textarea>
-                        <p><h3>Производитель</h3></p>
+                        <p>
+                        <h3>Производитель</h3></p>
                         <textarea class="input-form" id="drugManufacturer" rows="3"
                                   name="manufacturer">${drug.manufacturer}</textarea>
-                        <p><h3>Условия хранения</h3></p>
+                        <p>
+                        <h3>Условия хранения</h3></p>
                         <textarea class="input-form" id="drugStorageConditions" rows="3"
                                   name="storageConditions">${drug.storageConditions}</textarea>
                     </div>
@@ -161,7 +178,8 @@
                 </div>
                 <br>
                 <form action="/search/analogue/${drug.id}" class="inst-title">
-                    <button type="submit" class="btn">Просмотреть аналоги</button><br>
+                    <button type="submit" class="btn">Просмотреть аналоги</button>
+                    <br>
                     <h2>Инструкция:</h2>
                 </form>
 
@@ -191,14 +209,15 @@
                         <strong>Условия хранения: </strong>${drug.storageConditions}
                     </p>
                     <p class="info-name">
-                        <strong>Категория: </strong><#if (drug.category)??>
-                            <#list (drug.category) as cat>
-                                ${cat.name}
+                        <strong>Категория: </strong>
+                        <#if (drug.category)??>
+                            <#list (drug.category) as category>
+                                ${category.name}<#sep>, </#sep>
                             </#list>
-                        </#if>
+                        <#else>Нет категории</#if>
                     </p>
                     <p class="info-name">
-                        <strong>Класс аналогa: </strong><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
+                        <strong>Класс аналогов: </strong><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
                     </p>
                 </div>
             </main>

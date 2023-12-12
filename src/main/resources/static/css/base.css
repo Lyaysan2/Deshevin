@@ -16,12 +16,16 @@ a {
     font-size: 20px;
 }
 
-a:active, a:hover{
+a:active, a:hover {
     font-weight: bold;
 }
 
 .text-center {
     text-align: center;
+}
+
+.table-align {
+    margin-top: 40px;
 }
 
 .navbar {
@@ -83,7 +87,11 @@ a:active, a:hover{
     outline: none;
 }
 
-.container{
+.btn-align {
+    margin-bottom: 30px;
+}
+
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -147,6 +155,7 @@ a:active, a:hover{
 }
 
 .input-form {
+    font-family: Inter, sans-serif;
     border: 1px solid #1D0D8D;
     border-radius: 8px;
     padding: 12px;
@@ -173,6 +182,7 @@ a:active, a:hover{
 .profile-content {
     border: 1px solid #1D0D8D;
     padding: 16px;
+    margin-bottom: 40px;
 }
 
 .profile-info {
@@ -209,6 +219,10 @@ a:active, a:hover{
     width: 100%;
     position: relative;
     text-align: center;
+}
+
+.input-align {
+    margin-top: 20px;
 }
 
 .input__file {

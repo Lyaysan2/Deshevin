@@ -4,20 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель для добавления классов аналогов">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="М. Ильдар">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Панель для добавления классов аналогов</title>
 
 
-
     <#include "components/links.ftl">
     <script>
-        function delet(id){
+        function delet(id) {
             jQuery.ajax({
-                url:'/analogue?id='+id,
-                type:'delete'
+                url: '/analogue?id=' + id,
+                type: 'delete'
             });
-
+            $('#' + id).closest('.item-row').remove();
         }
     </script>
 
@@ -29,7 +28,8 @@
     <section class="py-5">
         <form method="post" action="/analogue" enctype="multipart/form-data">
             <p>
-                <input class="input-form" name="title" id="inputAnalogue" type="text" placeholder="Введите класс аналогов">
+                <input class="input-form" name="title" id="inputAnalogue" type="text"
+                       placeholder="Введите класс аналогов">
                 <button type="submit" class="btn btn-info mb-2">Добавить</button>
             </p>
         </form>
@@ -42,7 +42,6 @@
         </div>
     </#list>
 </div>
-
 
 
 <#--<#include "components/footer.ftl" >-->

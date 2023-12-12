@@ -10,8 +10,6 @@
         <div class="navbar-text-content">
 
             <div class="navbar-left-content">
-                <a class="navbar-text" href="/homepage"/>Главная</a>
-
                 <a class="navbar-text" href="/search"/>Поиск лекарств</a>
             </div>
 

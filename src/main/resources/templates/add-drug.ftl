@@ -4,27 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель добавления лекарств">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="М. Ильдар">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Панель добавления лекарств</title>
 
-<#--    <style>-->
-<#--        .drug-form {-->
-<#--            margin-left: auto;-->
-<#--            margin-right: auto;-->
-<#--            width: 50%;-->
-<#--        }-->
+    <#--    <style>-->
+    <#--        .drug-form {-->
+    <#--            margin-left: auto;-->
+    <#--            margin-right: auto;-->
+    <#--            width: 50%;-->
+    <#--        }-->
 
-<#--        .brd {-->
-<#--            border: 4px double black; /* Параметры границы */-->
-<#--            padding: 10px; /* Поля вокруг текста */-->
-<#--        }-->
+    <#--        .brd {-->
+    <#--            border: 4px double black; /* Параметры границы */-->
+    <#--            padding: 10px; /* Поля вокруг текста */-->
+    <#--        }-->
 
-<#--    </style>-->
-
-
+    <#--    </style>-->
     <#include "components/links.ftl">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputFile = document.getElementById('input__file');
+            var fileButtonText = document.querySelector('.input__file-button-text');
 
+            inputFile.addEventListener('change', function () {
+                if (inputFile.files.length > 0) {
+                    fileButtonText.innerText = inputFile.files[0].name;
+                } else {
+                    fileButtonText.innerText = 'Загрузить изображение';
+                }
+            });
+        });
+    </script>
+</head>
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
@@ -56,7 +68,8 @@
                 </div>
                 <div class="mb-3">
                     <h3>Противопоказания</h3>
-                    <textarea class="input-form" id="drugContraindications" rows="3" name="contraindications"></textarea>
+                    <textarea class="input-form" id="drugContraindications" rows="3"
+                              name="contraindications"></textarea>
                 </div>
                 <div class="mb-3">
                     <h3>Побочные эффекты</h3>
@@ -76,12 +89,14 @@
                 </div>
                 <div class="mb-3">
                     <h3>Условия хранения</h3>
-                    <textarea class="input-form" id="drugStorageConditions" rows="3" name="storageConditions"></textarea>
+                    <textarea class="input-form" id="drugStorageConditions" rows="3"
+                              name="storageConditions"></textarea>
                 </div>
 
 
-                <div class="input__wrapper">
-                    <input name="file" type="file" id="input__file" class="input input__file" accept=".jpg, .png, .jpeg" required>
+                <div class="input__wrapper input-align">
+                    <input name="file" type="file" id="input__file" class="input input__file" accept=".jpg, .png, .jpeg"
+                           required>
                     <label for="input__file" class="input__file-button">
                         <span class="input__file-button-text">Загрузить изображение</span>
                     </label>
@@ -120,7 +135,7 @@
     </div>
 
 
-<#--    <#include "components/footer.ftl" >-->
+    <#--    <#include "components/footer.ftl" >-->
 </main>
 </body>
 </html>

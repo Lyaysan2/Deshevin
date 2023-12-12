@@ -4,28 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Страница поиска препаратов">
-    <meta name="author" content="Ф. Гусев">
+    <meta name="author" content="Г. Лейсан">
     <title>Просмотр аналогов</title>
     <#include "components/links.ftl">
-    <script>
-        function delet(id) {
-            jQuery.ajax({
-                url: '/favourites/delete-from-favourites/' + id,
-                type: 'delete'
-            });
-        }
-    </script>
-    <script>
-        function addToFav(id) {
-            jQuery.ajax({
-                url: '/favourites/add-to-favourites/' + id,
-                type: 'post',
-                success: function(){
-                    window.location.reload();
-                }
-            });
-        }
-    </script>
     <style>
         .avatar {
             width: 200px;
@@ -48,7 +29,7 @@
     <div class="container">
         <h1>Просмотр аналогов препаратов для: ${drug.title}</h1>
 
-        <table class="table">
+        <table class="table table-align">
             <thead class="thead-light bg-info">
             <tr>
                 <th scope="col" class="table-title">Название</th>

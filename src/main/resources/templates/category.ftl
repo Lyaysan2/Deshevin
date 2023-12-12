@@ -4,21 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель для добавления категорий">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="Г. Лейсан">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Панель для добавления категорий</title>
 
     <#include "components/links.ftl">
     <script>
-        function delet(id){
+        function delet(id) {
             jQuery.ajax({
-                url:'/category?id='+id,
-                type:'delete'
+                url: '/category?id=' + id,
+                type: 'delete'
             });
-            jQuery.ajax({
-                url:'/category',
-                type:'get'
-            });
+            $('#' + id).closest('.item-row').remove();
         }
     </script>
 
@@ -43,7 +40,6 @@
         </div>
     </#list>
 </div>
-
 
 
 <#--<#include "components/footer.ftl" >-->
