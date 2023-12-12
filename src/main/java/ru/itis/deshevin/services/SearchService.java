@@ -13,6 +13,4 @@ public interface SearchService {
 
     List<DrugDto> getDrugsWithSameAnalogueClassAs(UUID drugId);
 
-//    List<DrugDto> getDrugsWithSameCategoryAs(UUID drugId);
-
 }

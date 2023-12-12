@@ -10,14 +10,12 @@
 
     <#include "components/links.ftl">
 
-    <#--todo-->
     <script>
         function isCategorySelected(name, drug) {
             console.log(drug);
             if (drug.category.size !== 0) {
                 console.log(drug.category);
                 return true;
-                // return name.contains(drug.category);
             }
             return false;
         }
@@ -225,8 +223,6 @@
     </div>
 
 </main>
-
-<#--<#include "components/footer.ftl" >-->
 
 </body>
 </html>

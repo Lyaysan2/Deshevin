@@ -38,7 +38,7 @@ public class AnalogueClassController {
     }
 
     @DeleteMapping
-    public String deleteCategory(@RequestParam UUID id) {
+    public String deleteAnalogueClass(@RequestParam UUID id) {
         analogueClassService.deleteAnalogueClass(id);
         return "redirect:analogue";
     }

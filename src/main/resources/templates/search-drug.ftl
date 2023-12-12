@@ -110,15 +110,17 @@
                             <button type="submit" class="btn-delete btn-align">Просмотреть аналоги</button>
                         </form>
                         <#if user??>
-                            <#if inFavorites(user, drug)>
-                                <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из
-                                    избранных
-                                </button>
-                            <#else>
-                                <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить
-                                    в
-                                    избранные
-                                </button>
+                            <#if user.role == 'COMMON_USER'>
+                                <#if inFavorites(user, drug)>
+                                    <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из
+                                        избранных
+                                    </button>
+                                <#else>
+                                    <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить
+                                        в
+                                        избранные
+                                    </button>
+                                </#if>
                             </#if>
                         </#if>
                     </div>
@@ -128,7 +130,5 @@
         </tbody>
     </table>
 </div>
-
-<#--    <#include "components/footer.ftl" >-->
 </body>
 </html>

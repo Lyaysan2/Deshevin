@@ -26,13 +26,11 @@ public class FavouritesController {
     public void addItemToFavourites(@AuthenticationPrincipal UserEntityDetails userEntityDetails,
                                       @PathVariable("drug-id") UUID drugId) {
         favouritesService.addDrugToFavourites(userEntityDetails.getUserEntity().getId(), drugId);
-//        return "redirect:/favourites";
     }
 
     @DeleteMapping("/delete-from-favourites/{drug-id}")
     public void deleteItemFromFavourites(@AuthenticationPrincipal UserEntityDetails userEntityDetails,
                                            @PathVariable("drug-id") UUID drugId) {
         favouritesService.deleteDrugFromFavourites(userEntityDetails.getUserEntity().getId(), drugId);
-//        return "redirect:/favourites";
     }
 }

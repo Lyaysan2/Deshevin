@@ -31,16 +31,4 @@ public class SearchServiceImpl implements SearchService {
         DrugEntity drug = optionalDrug.get();
         return drugMapper.toDrudListDto(drugRepository.findAllByAnalogueClass(drug.getAnalogueClass()));
     }
-
-//    @Override
-//    public Set<DrugDto> getDrugsWithSameCategoryAs(UUID drugId) {
-//        log.info("Search for drugs in same category with {}", drugId);
-//        Optional<DrugsEntity> optionalDrug = drugRepository.findById(drugId);
-//        if(optionalDrug.isEmpty()) {
-//            log.error("Drug not found! id = {}", drugId);
-//            return new ArraySet<>();
-//        }
-//        DrugsEntity drug = optionalDrug.get();
-//        return drugMapper.toDrugSetDto(drugRepository.findAllByCategory(drug.getCategory()));
-//    }
 }

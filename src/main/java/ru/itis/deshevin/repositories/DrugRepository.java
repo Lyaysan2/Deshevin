@@ -16,5 +16,4 @@ public interface DrugRepository extends JpaRepository<DrugEntity, UUID> {
 
     List<DrugEntity> findAllByAnalogueClass(AnalogueClassEntity analogueClass);
 
-//    Set<DrugsEntity> findAllByCategory(CategoryEntity category);
 }

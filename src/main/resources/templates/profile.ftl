@@ -38,17 +38,15 @@
             </div>
         </div>
 
-        <div>
-            <button onclick="location.href='/favourites';" class="btn" href="/search">Избранное</button>
-        </div>
+        <#if user.role == 'COMMON_USER'>
+            <div>
+                <button onclick="location.href='/favourites';" class="btn" href="/search">Избранное</button>
+            </div>
+        </#if>
 
         <br>
         <br>
     </div>
-
-
-
-<#--    <#include "components/footer.ftl" >-->
 
 </main>
 </body>

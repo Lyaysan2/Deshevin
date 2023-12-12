@@ -25,7 +25,7 @@ public class SearchController {
     private final UserService userService;
 
     @GetMapping
-    public String getAnalogueSearchPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model,
+    public String getDrugSearchPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails, Model model,
                                         @RequestParam Optional<String> prefixParam) {
         String prefix = prefixParam.orElse("");
         model.addAttribute("user", userService.getUserByAuth(userEntityDetails).orElse(null));
@@ -42,14 +42,4 @@ public class SearchController {
         model.addAttribute("analogues", searchService.getDrugsWithSameAnalogueClassAs(id));
         return "analogue-drugs";
     }
-
-//    @GetMapping("/category/{id}")
-//    public String getCategoryPage(@AuthenticationPrincipal UserEntityDetails userEntityDetails,
-//                                  @PathVariable UUID id,
-//                                  Model model) {
-//        model.addAttribute("user", userEntityDetails == null ? null : userEntityDetails.getUserEntity());
-//        model.addAttribute("drugs", searchService.getDrugsWithSameCategoryAs(id));
-//        return "analogue-drugs";
-//    }
-
 }
