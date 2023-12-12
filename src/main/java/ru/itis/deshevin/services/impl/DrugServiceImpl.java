@@ -15,6 +15,7 @@ import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.FilesService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class DrugServiceImpl implements DrugService {
             newFile = filesService.saveFileToStorage(addDrugDto.getFile()).get();
         }
         DrugEntity newDrug = drugMapper.toDrugEntity(addDrugDto);
-        newDrug.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
+        newDrug.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdSet()));
         newDrug.setPhoto(newFile);
         drugRepository.save(newDrug);
         log.info("Finish saving drug");
@@ -57,12 +58,8 @@ public class DrugServiceImpl implements DrugService {
                             .build()
             );
         }
-        FileInfoEntity newFile = null;
-        if (addDrugDto.getFile() != null) {
-            newFile = filesService.saveFileToStorage(addDrugDto.getFile()).get();
-        }
-        if (!addDrugDto.getCategoryIdList().isEmpty()) {
-            drugEntity.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdList()));
+        if (!addDrugDto.getCategoryIdSet().isEmpty()) {
+            drugEntity.setDrugsCategory(categoryService.getCategoriesById(addDrugDto.getCategoryIdSet()));
         }
         drugEntity.setTitle(addDrugDto.getTitle());
         drugEntity.setDescription(addDrugDto.getDescription());
@@ -74,7 +71,6 @@ public class DrugServiceImpl implements DrugService {
         drugEntity.setEffect(addDrugDto.getEffect());
         drugEntity.setInstruction(addDrugDto.getInstruction());
         drugEntity.setStorageConditions(addDrugDto.getStorageConditions());
-        drugEntity.setPhoto(newFile);
         drugRepository.save(drugEntity);
         log.info("Finish updating drug");
     }
@@ -82,7 +78,7 @@ public class DrugServiceImpl implements DrugService {
     @Override
     public List<DrugDto> getAllDrugs(String prefix) {
         log.info("Drug search by prefix {}", prefix);
-        List<DrugDto> drugDtoList = drugMapper.toDrugListDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
+        List<DrugDto> drugDtoList = drugMapper.toDrudListDto(drugRepository.findAllByTitleContainingIgnoreCase(prefix))
                 .stream()
                 .peek(
                         drug -> drug.setDescription(drug.getDescription().substring(0, Integer.min(100, drug.getDescription().length())))

@@ -4,60 +4,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Страница поиска препаратов">
-    <meta name="author" content="Ф. Гусев">
+    <meta name="author" content="Г. Лейсан">
     <title>Поиск препаратов</title>
     <#include "components/links.ftl">
-<#--    <script>-->
-<#--        function updateList() {-->
-<#--            $.getJSON('/search/prefix/'+document.getElementById('prefix_text').value, function(data) {-->
-<#--                const old_tbody = document.getElementById("content-tbody")-->
-<#--                const new_tbody = document.createElement('tbody');-->
-<#--                new_tbody.setAttribute("id", "content-tbody")-->
-<#--                old_tbody.parentNode.replaceChild(new_tbody, old_tbody)-->
-<#--                for(var i in data) {-->
-<#--                    var tbodyRef = document.getElementById("content-table").getElementsByTagName('tbody')[0];-->
-<#--                    var newRow = tbodyRef.insertRow();-->
-
-<#--                    var newCellTitle = newRow.insertCell();-->
-<#--                    var titleLink = document.createElement('a');-->
-<#--                    titleLink.innerHTML = '<a href="/drug/'+data[i].id+'">'+data[i].title+'</a>';-->
-<#--                    newCellTitle.appendChild(titleLink);-->
-
-<#--                    newRow.insertCell().appendChild(document.createTextNode(data[i].description + '...'));-->
-<#--                    newRow.insertCell().appendChild(document.createTextNode(data[i].category));-->
-<#--                    newRow.insertCell().appendChild(document.createTextNode(data[i].analogueClass));-->
-
-<#--                    var newCellAction = newRow.insertCell();-->
-<#--                    var action = document.createElement('div');-->
-<#--                    action.innerHTML = '<form action="/search/analogue/'+data[i].id+'">' +-->
-<#--                                        '<button type="submit" class="btn">Просмотреть аналоги</button></form>';-->
-<#--                    newCellAction.appendChild(action);-->
-<#--                }-->
-<#--            });-->
-<#--        }-->
-<#--    </script>-->
     <script>
-        function delet(id) {
+        function delet(id, button) {
             jQuery.ajax({
                 url: '/favourites/delete-from-favourites/' + id,
-                type: 'delete',
-                success: function(){
-                    window.location.reload();
-                }
+                type: 'delete'
             });
+            button.innerText = 'Добавить в избранные';
+            button.onclick = function () {
+                addToFav(id, button);
+            };
         }
     </script>
+
     <script>
-        function addToFav(id) {
+        function addToFav(id, button) {
             jQuery.ajax({
                 url: '/favourites/add-to-favourites/' + id,
-                type: 'post',
-                success: function(){
-                    window.location.reload();
-                }
+                type: 'post'
             });
+            button.innerText = 'Удалить из избранных';
+            button.onclick = function () {
+                delet(id, button);
+            };
         }
     </script>
+
     <style>
         .avatar {
             width: 200px;
@@ -68,79 +43,92 @@
     </style>
 </head>
 <body class="text-center">
-    <#include "components/header.ftl">
-    <#function inFavorites(user, drug)>
-        <#list user.favorites as userFavDrugs>
-            <#if userFavDrugs.title == drug.title>
-                <#return true>
-            </#if>
-        </#list>
-        <#return false>
-    </#function>
+<#include "components/header.ftl">
+<#function inFavorites(user, drug)>
+    <#list user.favorites as userFavDrugs>
+        <#if userFavDrugs.title == drug.title>
+            <#return true>
+        </#if>
+    </#list>
+    <#return false>
+</#function>
 
-    <div class="container">
+<div class="container">
+    <div class="content">
         <h1>Поиск препаратов</h1>
+        <form action="/search" method="get">
+            <p>
+                <input type="text" class="input-form" name="prefixParam" id="prefixParam"
+                       placeholder="Введите название лекарства">
+                <input type="submit" class="btn" value="Поиск">
+            </p>
+        </form>
     </div>
 
-    <form action="/search" method="get">
-        <p>
-            <label for="name">Напишите название:</label>
-            <input type="text" name="prefixParam" id="prefixParam">
-            <input type="submit" value="Поиск">
-        </p>
-    </form>
-
-    <table class="table" id="content-table">
+    <table class="table table-align" id="content-table">
         <thead class="thead-light bg-info">
         <tr>
-            <th scope="col">Фото</th>
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Категория</th>
-            <th scope="col">Аналог класс</th>
-            <th scope="col">Действие</th>
+            <th scope="col" class="table-title">Название</th>
+            <th scope="col" class="table-title">Описание</th>
+            <th scope="col" class="table-title">Категория</th>
+            <th scope="col" class="table-title">Действие</th>
         </tr>
         </thead>
         <tbody id="content-tbody">
         <#list drugs as drug>
             <tr>
-                <#if (drug.drugImageFileDBID)??>
-                    <td scope="row"><img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar"></td>
-                <#else>
-                    <td scope="row"><img src="/img/no-image.png" alt="avatar" class="avatar"/></td>
-                </#if>
-                <td><a href="/drug/${drug.id}">${drug.title}</a></td>
-                <td>${drug.description}...</td>
                 <td>
-                    <#if (drug.category)??>
-                        <#list (drug.category) as cat>
-                            ${cat.name}
-                        </#list>
-                    </#if>
+                    <div class="table-item">
+                        <div class="title-photo">
+                            <a href="/drug/${drug.id}" class="drug-name">${drug.title}</a>
+                            <br>
+                            <#if (drug.drugImageFileDBID)??>
+                                <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
+                            <#else>
+                                <img src="/img/no-image.png" alt="avatar" class="avatar"/>
+                            </#if>
+                        </div>
+                    </div>
                 </td>
-                <td> <#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if></td>
                 <td>
-                    <form action="/search/analogue/${drug.id}">
-                        <button type="submit" class="btn">Просмотреть аналоги</button>
-                    </form>
-                    <#if user??>
-                        <#if inFavorites(user, drug)>
-                            <button type="submit" onclick="delet('${drug.id}')" class="btn">Удалить из избранных</button>
-                        <#else>
-                            <button type="submit" onclick="addToFav('${drug.id}')" class="btn">Добавить в избранные</button>
+                    <div class="table-item">
+                        ${drug.description}...
+                    </div>
+                </td>
+                <td>
+                    <div class="table-item">
+                        <#if (drug.category)??>
+                            <#list (drug.category) as cat>
+                                ${cat.name}<br>
+                            </#list>
                         </#if>
-                    </#if>
-                    <!-- Может быть, будет использовано позднее
-                    <form action="/search/category/${drug.id}">
-                        <button type="submit" class="btn">Просмотреть препараты этой категории</button>
-                    </form>
-                    -->
+                    </div>
+                </td>
+                <td>
+                    <div class="table-item">
+                        <form action="/search/analogue/${drug.id}">
+                            <button type="submit" class="btn-delete btn-align">Просмотреть аналоги</button>
+                        </form>
+                        <#if user??>
+                            <#if user.role == 'COMMON_USER'>
+                                <#if inFavorites(user, drug)>
+                                    <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из
+                                        избранных
+                                    </button>
+                                <#else>
+                                    <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить
+                                        в
+                                        избранные
+                                    </button>
+                                </#if>
+                            </#if>
+                        </#if>
+                    </div>
                 </td>
             </tr>
         </#list>
         </tbody>
     </table>
-
-    <#include "components/footer.ftl" >
+</div>
 </body>
 </html>

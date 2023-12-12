@@ -11,8 +11,10 @@ import ru.itis.deshevin.repositories.DrugRepository;
 import ru.itis.deshevin.repositories.UserRepository;
 import ru.itis.deshevin.services.FavouritesService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -37,8 +39,9 @@ public class FavouritesServiceImpl implements FavouritesService {
     @Override
     public List<DrugDto> getFavouriteDrugs(UUID userId) {
         UserEntity user = userRepository.findById(userId).orElseThrow();
-        log.info("Successfuly return list of drugs for account: " + user);
-        return drugMapper.toDrugListDto(user.getFavorites());
+        log.info("Successfuly return Set of drugs for account: " + user);
+        log.info("all fav " + user.getFavorites());
+        return drugMapper.toDrudListDto(new ArrayList<>(user.getFavorites()));
     }
 
     @Override

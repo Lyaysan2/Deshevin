@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель добавления лекарств">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="М. Ильдар">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Форма регистрации</title>
 
@@ -28,11 +28,11 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <h1>Вход</h1>
     <div class="home-content">
+        <h1>Вход</h1>
         <form method="post" action="/sign-in" class="form-wrapper" enctype="multipart/form-data">
             <div>
-                <h3>Логин или электронная почта</h3>
+                <h3>Электронная почта</h3>
                 <input type="email" class="input-form" id="email" name="email" required>
             </div>
             <div>

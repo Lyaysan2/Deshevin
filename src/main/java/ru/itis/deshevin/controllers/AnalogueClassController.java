@@ -9,9 +9,12 @@ import ru.itis.deshevin.dto.AnalogueClassDto;
 import ru.itis.deshevin.dto.CategoryDto;
 import ru.itis.deshevin.security.details.UserEntityDetails;
 import ru.itis.deshevin.services.AnalogueClassService;
+import ru.itis.deshevin.services.DrugService;
 import ru.itis.deshevin.services.UserService;
 
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/analogue")
@@ -35,7 +38,7 @@ public class AnalogueClassController {
     }
 
     @DeleteMapping
-    public String deleteCategory(@RequestParam UUID id) {
+    public String deleteAnalogueClass(@RequestParam UUID id) {
         analogueClassService.deleteAnalogueClass(id);
         return "redirect:analogue";
     }

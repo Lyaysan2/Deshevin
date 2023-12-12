@@ -3,7 +3,7 @@ package ru.itis.deshevin.dto;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -23,7 +23,7 @@ public class AddDrugDto {
     private String instruction;
     private String storageConditions;
 
-    private List<String> categoryIdList;
+    private Set<String> categoryIdSet;
     private UUID analogueId;
 
     private MultipartFile file;

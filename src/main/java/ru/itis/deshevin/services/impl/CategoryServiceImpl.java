@@ -10,10 +10,8 @@ import ru.itis.deshevin.repositories.CategoryRepository;
 import ru.itis.deshevin.services.CategoryService;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -52,7 +50,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Set<CategoryEntity> getCategoriesById(List<String> categoriesId) {
-        return new HashSet<>(categoryRepository.findAllById(categoriesId.stream().map(UUID::fromString).collect(Collectors.toList())));
+    public Set<CategoryEntity> getCategoriesById(Set<String> categoriesId) {
+        return new HashSet<>(categoryRepository.findAllById(categoriesId.stream().map(UUID::fromString)
+                .collect(Collectors.toSet())));
     }
 }

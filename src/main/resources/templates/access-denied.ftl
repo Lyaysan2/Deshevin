@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель добавления лекарств">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="Г. Лейсан">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Форма регистрации</title>
 

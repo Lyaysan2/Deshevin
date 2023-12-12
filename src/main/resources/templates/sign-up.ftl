@@ -4,23 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Панель добавления лекарств">
-    <meta name="author" content="Ю. Марсель">
+    <meta name="author" content="М. Ильдар">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Форма регистрации</title>
 
-    <style>
-        .sign-up-form {
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-        }
+<#--    <style>-->
+<#--        .sign-up-form {-->
+<#--            margin-left: auto;-->
+<#--            margin-right: auto;-->
+<#--            width: 50%;-->
+<#--        }-->
 
-        .brd {
-            border: 4px double black; /* Параметры границы */
-            padding: 10px; /* Поля вокруг текста */
-        }
+<#--        .brd {-->
+<#--            border: 4px double black; /* Параметры границы */-->
+<#--            padding: 10px; /* Поля вокруг текста */-->
+<#--        }-->
 
-    </style>
+<#--    </style>-->
 
 
     <#include "components/links.ftl">
@@ -28,8 +28,8 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <h1>Регистрация</h1>
     <div class="home-content">
+        <h1>Регистрация</h1>
         <form method="post" action="/sign-up" class="form-wrapper" enctype="multipart/form-data">
             <div>
                 <h3>Имя пользователя</h3>

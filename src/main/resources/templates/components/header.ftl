@@ -10,8 +10,6 @@
         <div class="navbar-text-content">
 
             <div class="navbar-left-content">
-                <a class="navbar-text" href="/homepage"/>Главная</a>
-
                 <a class="navbar-text" href="/search"/>Поиск лекарств</a>
             </div>
 
@@ -23,9 +21,9 @@
 
                         <a class="navbar-text" href="/drug"/>Добавить лекарство</a>
 
-                        <a class="navbar-text" href="/analogue"/>Добавить класс аналоги</a>
+                        <a class="navbar-text" href="/analogue"/>Классы аналогов</a>
 
-                        <a class="navbar-text" href="/category"/>Добавить категорию</a>
+                        <a class="navbar-text" href="/category"/>Категории</a>
                     </#if>
 
                     <a class="navbar-text" href="/profile"/>Профиль (${user.username})</a>
