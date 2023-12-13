@@ -255,8 +255,8 @@ a:active, a:hover {
 }
 
 .title-photo {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    place-items: center;
 }
 
 .drug-name {
@@ -314,6 +314,8 @@ tr:first-child {
 
 .drug-desc {
     margin-left: 30px;
+    width: 600px;
+    text-align: left;
 }
 
 .drug-info {
