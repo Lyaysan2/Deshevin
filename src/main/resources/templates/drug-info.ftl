@@ -164,20 +164,23 @@
                         <#else>
                             <img src="/img/no-image.png" alt="avatar" class="avatar"/>
                         </#if>
-                        <h2 class="drug-desc">Описание: <p style="font-weight: normal; font-size: 24px">${drug.description}</p></h2>
+                        <h2 class="drug-desc">Описание: <p
+                                    style="font-weight: normal; font-size: 24px">${drug.description}</p></h2>
                     </div>
                     <br>
                     <form action="/search/analogue/${drug.id}" class="inst-title">
-                        <button type="submit" class="btn">Просмотреть аналоги</button>
+                        <button type="submit" onclick="" class="btn">Просмотреть аналоги</button>
                         <br>
                         <div>
                             <#if user??>
                                 <#if user.role == 'COMMON_USER'>
                                     <#if inFavorites(user, drug)>
-                                        <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из избранного
+                                        <button type="button" onclick="delet('${drug.id}', this)" class="btn-delete">
+                                            Удалить из избранного
                                         </button>
                                     <#else>
-                                        <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить в избранное
+                                        <button type="button" onclick="addToFav('${drug.id}', this)" class="btn-delete">
+                                            Добавить в избранное
                                         </button>
                                     </#if>
                                 </#if>
@@ -221,7 +224,8 @@
                             <#else>Нет категории</#if>
                         </p>
                         <p class="info-name">
-                            <strong>Класс аналогов: </strong><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
+                            <strong>Класс
+                                аналогов: </strong><#if drug.analogueClass??>${drug.analogueClass}<#else>нет</#if>
                         </p>
                     </div>
                 </main>
