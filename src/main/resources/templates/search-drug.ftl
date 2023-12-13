@@ -13,7 +13,7 @@
                 url: '/favourites/delete-from-favourites/' + id,
                 type: 'delete'
             });
-            button.innerText = 'Добавить в избранные';
+            button.innerText = 'Добавить в избранное';
             button.onclick = function () {
                 addToFav(id, button);
             };
@@ -26,7 +26,7 @@
                 url: '/favourites/add-to-favourites/' + id,
                 type: 'post'
             });
-            button.innerText = 'Удалить из избранных';
+            button.innerText = 'Удалить из избранного';
             button.onclick = function () {
                 delet(id, button);
             };
@@ -113,12 +113,12 @@
                             <#if user.role == 'COMMON_USER'>
                                 <#if inFavorites(user, drug)>
                                     <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из
-                                        избранных
+                                        избранного
                                     </button>
                                 <#else>
                                     <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить
                                         в
-                                        избранные
+                                        избранное
                                     </button>
                                 </#if>
                             </#if>

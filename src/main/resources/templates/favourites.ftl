@@ -34,7 +34,7 @@
 <body class="text-center">
 <#include "components/header.ftl">
 <main class="container">
-    <h1 class="text-center">Избранные лекарства</h1>
+    <h1 class="text-center">Избранное</h1>
 
     <table class="table table-align">
         <thead class="thead-light bg-info">
@@ -80,7 +80,7 @@
                     <td>
                         <div class="table-item">
                             <button type="submit" onclick="delFromFav('${drug.id}')"
-                                    class="btn-delete">Удалить из избранных
+                                    class="btn-delete">Удалить из избранного
                             </button>
                         </div>
                     </td>
