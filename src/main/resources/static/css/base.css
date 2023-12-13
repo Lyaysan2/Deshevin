@@ -241,16 +241,6 @@ a:active, a:hover {
     height: 30px;
     color: #FC462D;
     font-size: 18px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    border-radius: 3px;
     cursor: pointer;
 }
 
