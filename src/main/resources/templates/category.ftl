@@ -35,7 +35,7 @@
     <br>
     <#list categories as category>
         <div class="item-row">
-            <div class="form-check-label" id=${category.id}>${category.name}</div>
+            <div class="form-check-label" style="font-weight: bold" id=${category.id}>${category.name}</div>
             <button type="submit" onclick="delet('${category.id}')" class="btn-delete">Удалить</button>
         </div>
     </#list>
