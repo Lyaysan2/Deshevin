@@ -67,19 +67,21 @@
 </#function>
 <main class="container">
     <div class="drug-title">
-        <#if user.role == 'COMMON_USER'>
-            <h2 class="drug-name">${drug.title}</h2>
-            <#if inFavorites(user, drug)>
-                <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из избранных
-                </button>
-            <#else>
-                <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить в избранные
-                </button>
+        <h2 class="drug-name">${drug.title}</h2>
+        <#if user??>
+            <#if user.role == 'COMMON_USER'>
+                <#if inFavorites(user, drug)>
+                    <button type="submit" onclick="delet('${drug.id}', this)" class="btn-delete">Удалить из избранных
+                    </button>
+                <#else>
+                    <button type="submit" onclick="addToFav('${drug.id}', this)" class="btn-delete">Добавить в избранные
+                    </button>
+                </#if>
             </#if>
         </#if>
     </div>
     <div class="row justify-content-md-center">
-        <#if user.role == 'ADMIN'>
+        <#if user?? && user.role == 'ADMIN'>
             <form method="post" action="" class="content" enctype="multipart/form-data">
                 <#if (drug.drugImageFileDBID)??>
                     <img src="/files/${drug.drugImageFileDBID}" alt="avatar" class="avatar">
@@ -164,7 +166,7 @@
                     <br>
                 </div>
             </form>
-        <#elseif user.role == 'COMMON_USER'>
+        <#else>
             <main>
                 <div class="photo-desc">
                     <#if (drug.drugImageFileDBID)??>

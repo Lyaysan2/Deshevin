@@ -204,7 +204,6 @@ a:active, a:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 30%;
     align-items: center;
     margin-bottom: 10px;
     border-bottom: solid 1px #1D0D8D;
